@@ -1,0 +1,44 @@
+#
+# Import new image on base image update
+#
+name: ACR base image import
+trigger: none
+pr: none
+pool:
+  vmImage: 'Ubuntu 16.04'
+variables:
+  environment: 'nonprod'
+  serviceConnection: 'azurerm-nonprod'
+  acrName: hmctspublic
+  baseImage: library/node
+  baseRegistry: docker.io
+  baseTag: 8-alpine
+  baseImageType: docker  # docker or gcr
+  targetImage: hmcts/base/node/alpine-lts-8
+  targetTag: 8-alpine
+
+jobs:
+- job: updateImage
+  workspace:
+    clean: all
+  steps:
+  - task: AzureCLI@1
+    displayName: 'Get digest for repository/tag from base registry'
+    inputs:
+      azureSubscription: azurerm-nonprod
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        if [ $(baseImage) == "docker" ]
+        then
+          _token=`curl --silent "https://auth.docker.io/token?scope=repository:$(baseImage):pull&service=registry.docker.io" | jq -r '.token'`
+          _digest=`curl --silent --header "Accept: application/vnd.docker.distribution.manifest.v2+json" --header "Authorization: Bearer $_token" \
+          "https://registry-1.docker.io/v2/$(baseImage)/manifests/$(baseTag)" | jq -r '.config.digest'`
+          [ "$_digest" == "" ] && echo "Error: cannot get image digest for $(baseImage):$(baseTag)" && exit 1
+        else
+          _digest=`curl --silent "https://gcr.io/v2/$(baseImage)/manifests/$(baseTag)" |jq -r '.config.digest'`
+        fi
+        _acr_digest=`az acr repository show-manifests -n $(acrName) --repository $(baseImage) --query '[].[digest,tags[?@ == `8-alpine`]]|[0]|[0]'` 
+        if [[ "$_acr_digest" == "" || "$_acr_digest" != "$_digest" ]]
+        then
+          az acr import --name $(acrName) --source $(baseRegistry)/$(baseImage):$(baseTag) --image $(targetImage):$(targetTag)-${_digest:7:6} 
+        fi
