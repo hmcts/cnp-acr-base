@@ -11,11 +11,12 @@ variables:
   baseRegistry: docker.io
   baseTag: 8-alpine
   baseImageType: docker  # docker or gcr
+  targetRegistry: hmctspublic.azurecr.io
   targetImage: hmcts/base/node/alpine-lts-8
-  targetTag: 8-alpine
+
 steps:
 - task: AzureCLI@1
-  displayName: 'Get digest for repository/tag from base registry'
+  displayName: 'Import from base registry if new digest available for tag'
   inputs:
     azureSubscription: azurerm-nonprod
     scriptLocation: 'inlineScript'
@@ -34,8 +35,22 @@ steps:
       echo "Base registry current digest for $(baseImage):$(baseTag): $_digest"
       _acr_digest=$(az acr repository show-manifests -n $(acrName) --repository $(baseImage) --query '[].[digest,tags[?@ == `8-alpine`]]|[0]|[0]' > /dev/null 2>&1)
       echo "Target registry current digest for $(baseImage):$(baseTag): $_acr_digest"
-      if [[ "$_acr_digest" == "" || "$_acr_digest" != "$_digest" ]]
-      then
-        echo "Importing $_acr_digest ..."
-        az acr import --name $(acrName) --source $(baseRegistry)/$(baseImage):$(baseTag) --image $(targetImage):$(targetTag)-${_digest:7:6} 
-      fi
+      [[ "$_acr_digest" != "" && "$_acr_digest" == "$_digest" ]] && exit 2  # Nothing else to do
+      echo "Importing $_acr_digest ..."
+      az acr import --name $(acrName) --source $(baseRegistry)/$(baseImage):$(baseTag) --image $(targetImage):$(baseTag)-${_digest:7:6} 
+
+- task: AzureCLI@1
+  displayName: 'Security scan new image'
+  inputs:
+    azureSubscription: azurerm-nonprod
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      echo "This is a placeholder for NeuVector image scan"
+
+- task: AzureCLI@1
+  displayName: 'Re-tag new image using the base tag'
+  inputs:
+    azureSubscription: azurerm-nonprod
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az acr import --name $(acrName) --source $(targetRegistry)/$(targetImage):$(baseTag)-${_digest:7:6} --image $(targetImage):$(baseTag) 
