@@ -33,7 +33,7 @@ steps:
       fi
       [ "$_digest" == "" ] && echo "Error: cannot get image digest for $(baseImage):$(baseTag)" && exit 1
       echo "Base registry current digest for $(baseImage):$(baseTag): $_digest"
-      _acr_digest=$(az acr repository show-manifests -n $(acrName) --repository $(baseImage) --query '[].[digest,tags[?@ == `$(baseTag)`]]|[0]|[0]' > /dev/null 2>&1)
+      _acr_digest=$(az acr repository show-manifests -n $(acrName) --repository $(targetImage) --query '[].[digest,tags[?@ == `$(baseTag)`]]|[0]|[0]' > /dev/null 2>&1)
       echo "Target registry current digest for $(baseImage):$(baseTag): $_acr_digest"
       [[ "$_acr_digest" != "" && "$_acr_digest" == "$_digest" ]] && exit 2  # Nothing else to do
       echo "Importing $_acr_digest ..."
@@ -53,6 +53,6 @@ steps:
     azureSubscription: azurerm-nonprod
     scriptLocation: 'inlineScript'
     inlineScript: |
-      _acr_digest=$(az acr repository show-manifests -n $(acrName) --repository $(baseImage) --query '[].[digest,tags[?@ == `$(baseTag)`]]|[0]|[0]' > /dev/null 2>&1)
+      _acr_digest=$(az acr repository show-manifests -n $(acrName) --repository $(targetImage) --query '[].[digest,tags[?@ == `$(baseTag)`]]|[0]|[0]' > /dev/null 2>&1)
       [ "$_acr_digest" != "" ] && az acr repository untag -n $(acrName) --image $(targetImage):$(baseTag)
       az acr import --name $(acrName) --source $(targetRegistry)/$(targetImage):$(baseTag)-${_digest:7:6} --image $(targetImage):$(baseTag) 
