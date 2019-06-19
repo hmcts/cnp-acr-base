@@ -4,8 +4,6 @@
 name: ACR base image import
 trigger: none
 pr: none
-pool:
-  vmImage: 'Ubuntu 16.04'
 variables:
   environment: 'nonprod'
   serviceConnection: 'azurerm-nonprod'
