@@ -14,10 +14,6 @@ variables:
   baseImageType: docker  # docker or gcr
   targetImage: hmcts/base/node/alpine-lts-8
   targetTag: 8-alpine
-
-job: updateImage
-workspace:
-  clean: all
 steps:
 - task: AzureCLI@1
   displayName: 'Get digest for repository/tag from base registry'
