@@ -6,7 +6,6 @@ trigger: none
 pr: none
 variables:
   environment: 'nonprod'
-  serviceConnection: 'azurerm-nonprod'
   acrName: hmctspublic
   baseImage: library/node
   baseRegistry: docker.io
