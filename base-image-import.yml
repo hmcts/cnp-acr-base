@@ -53,4 +53,5 @@ steps:
     azureSubscription: azurerm-nonprod
     scriptLocation: 'inlineScript'
     inlineScript: |
+      az acr repository untag -n $(acrName) --image $(targetImage):$(baseTag)
       az acr import --name $(acrName) --source $(targetRegistry)/$(targetImage):$(baseTag)-${_digest:7:6} --image $(targetImage):$(baseTag) 
