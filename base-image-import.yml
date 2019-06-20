@@ -8,11 +8,6 @@ variables:
   environment: 'nonprod'
   acrName: hmctspublic
   targetRegistry: hmctspublic.azurecr.io
-  #baseImage: library/node
-  #baseTag: 8-alpine
-  #baseRegistry: docker.io
-  #baseImageType: docker  # docker or gcr
-  #targetImage: hmcts/base/node/alpine-lts-8
 
 jobs:
 - job:
@@ -31,6 +26,12 @@ jobs:
         baseTag: 10-alpine
         baseImageType: docker  # docker or gcr
         targetImage: hmcts/base/node/alpine-lts-10
+      openjdk-8-distroless:
+        baseImage: distroless/java
+        baseRegistry: gcr.io
+        baseTag: 8
+        baseImageType: gcr  # docker or gcr
+        targetImage: hmcts/base/java/distroless-8
   steps:
   - task: AzureCLI@1
     displayName: 'Import from base registry if new digest available for tag'
