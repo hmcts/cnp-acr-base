@@ -54,7 +54,7 @@ jobs:
         # Get current digest from target azure registry
         echo "Base registry current digest for $(baseImage):$(baseTag): $_digest"
         _acr_digest=$(az acr repository show-manifests -n $(acrName) --repository $(targetImage) \
-          --query '[?not_null(tags[])]|[?contains(tags, `8-alpine`)].digest|[0]' |tr '"' '')
+          --query '[?not_null(tags[])]|[?contains(tags, `8-alpine`)].digest|[0]' |tr -d '"')
         echo "Target registry current digest for $(baseImage):$(baseTag): $_acr_digest"
         [[ "$_acr_digest" != "" && "$_acr_digest" == "$_digest" ]] && echo "Nothing to import for $(baseRegistry)/$(baseImage)." && exit 2  # Nothing else to do
         # Import image if digest changed for tag
