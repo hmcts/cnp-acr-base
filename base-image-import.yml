@@ -45,7 +45,7 @@ jobs:
           # docker registry
           _token=$(curl --silent "https://auth.docker.io/token?scope=repository:$(baseImage):pull&service=registry.docker.io" | jq -r '.token')
           _digest=$(curl -i --silent --header "Accept: application/vnd.docker.distribution.manifest.v2+json" --header "Authorization: Bearer $_token" \
-          "https://registry-1.docker.io/v2/$(baseImage)/manifests/$(baseTag)" |grep 'Docker-Content-Digest:' |sed 's/Docker-Content-Digest: //')
+            "https://registry-1.docker.io/v2/$(baseImage)/manifests/$(baseTag)" |grep 'Docker-Content-Digest:' |sed 's/Docker-Content-Digest: //')
         else
           # google registry (gcr)
           _digest=$(curl --silent "https://gcr.io/v2/$(baseImage)/manifests/$(baseTag)" |jq -r '.config.digest')
