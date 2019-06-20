@@ -61,11 +61,10 @@ jobs:
         # acr import does not work witg gcr (see: https://github.com/Azure/azure-cli/issues/9557)
         if [ $(baseImageType) == "gcr" ]
         then
-          #docker pull $(baseRegistry)/$(baseImage):$(baseTag)
-          #docker image tag $(baseRegistry)/$(baseImage):$(baseTag) $(targetRegistry)/$(targetImage):$(baseTag)-${_digest:7:6}
+          docker pull $(baseRegistry)/$(baseImage):$(baseTag)
+          docker image tag $(baseRegistry)/$(baseImage):$(baseTag) $(targetRegistry)/$(targetImage):$(baseTag)-${_digest:7:6}
           #az acr login --name $(acrName)
-          #docker push $(targetRegistry)/$(targetImage):$(baseTag)-${_digest:7:6}
-          az acr import --name $(acrName) --source $(baseRegistry)/$(baseImage):$(baseTag) --image $(targetImage):$(baseTag)-${_digest:7:6} 
+          docker push $(targetRegistry)/$(targetImage):$(baseTag)-${_digest:7:6}
         else
           az acr import --name $(acrName) --source $(baseRegistry)/$(baseImage):$(baseTag) --image $(targetImage):$(baseTag)-${_digest:7:6} 
         fi
