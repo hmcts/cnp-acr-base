@@ -14,7 +14,8 @@ variables:
   #baseImageType: docker  # docker or gcr
   #targetImage: hmcts/base/node/alpine-lts-8
 
-job:
+jobs:
+- job:
   strategy:
     maxParallel: 2
     matrix: 
