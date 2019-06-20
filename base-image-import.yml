@@ -41,6 +41,7 @@ steps:
       # Import image if digest changed for tag
       echo "Importing $(baseRegistry)/$(baseImage)@${_digest} ..."
       az acr import --name $(acrName) --source $(baseRegistry)/$(baseImage)@${_digest} --image $(targetImage):$(baseTag)-${_digest:7:6} 
+      [[ $? -ne 0 ]] && exit 11
       # export variables for next stages
       echo "##vso[task.setvariable variable=acrDigest]$_acr_digest"
       echo "##vso[task.setvariable variable=baseDigest]${_digest:7:6}"
