@@ -67,17 +67,33 @@ jobs:
         echo "##vso[task.setvariable variable=acrDigest]$_acr_digest"
         echo "##vso[task.setvariable variable=baseDigest]${_digest:7:6}"
 
-  - task: AzureCLI@1
-    displayName: 'Import gcr image' # acr import does not work with gcr (see: https://github.com/Azure/azure-cli/issues/9557)
+  - task: Docker@2
+    displayName: 'Import gcr image (pull)' # acr import does not work with gcr (see: https://github.com/Azure/azure-cli/issues/9557)
     condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'gcr'))
     inputs:
-      azureSubscription: azurerm-nonprod
-      scriptLocation: 'inlineScript'
-      inlineScript: |
-        docker pull $(baseRegistry)/$(baseImage):$(baseTag)
-        docker image tag $(baseRegistry)/$(baseImage):$(baseTag) $(targetRegistry)/$(targetImage):$(baseTag)-$(baseDigest)
-        #az acr login --name $(acrName)
-        docker push $(targetRegistry)/$(targetImage):$(baseTag)-$(baseDigest)
+      command: pull
+      repository: $(baseRegistry)/$(baseImage)
+      tags: $(baseTag)
+      arguments: $(baseRegistry)/$(baseImage):$(baseTag)
+
+  - task: Docker@2
+    displayName: 'Import gcr image (tag)'
+    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'gcr'))
+    inputs:
+      command: tag
+      repository: $(baseRegistry)/$(baseImage)
+      tags: $(baseTag)
+      arguments: $(baseRegistry)/$(baseImage):$(baseTag) $(targetRegistry)/$(targetImage):$(baseTag)-$(baseDigest)
+
+  - task: Docker@2
+    displayName: 'Import gcr image (push)'
+    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'gcr'))
+    inputs:
+      command: push
+      containerRegistry: hmctspublicConnection
+      repository: $(targetImage)
+      tags: $(baseTag)-$(baseDigest)
+      #arguments: $(targetRegistry)/$(targetImage):$(baseTag)-$(baseDigest)
 
   - task: AzureCLI@1
     displayName: 'Import docker image'
