@@ -53,11 +53,11 @@ jobs:
         fi
         [ "$_digest" == "" ] && echo "Error: cannot get image digest for $(baseImage):$(baseTag)" && exit 1
         # Get current digest from target azure registry
-        echo "Base registry current digest for $(baseImage):$(baseTag): $_digest"
+        echo "Base registry current digest for $(baseImage):$(baseTag): [${_digest}]"
         _acr_digest=$(az acr repository show-manifests -n $(acrName) --repository $(targetImage) \
           --query '[?not_null(tags[])]|[?contains(tags, `8-alpine`)].digest|[0]' |tr -d '"[:blank:]')
-        echo "Target registry current digest for $(baseImage):$(baseTag): $_acr_digest"
-        [[ "$_acr_digest" != "" && "$_acr_digest" == "$_digest" ]] && echo "Nothing to import for $(baseRegistry)/$(baseImage)." && exit 2  # Nothing else to do
+        echo "Target registry current digest for $(baseImage):$(baseTag): [${_acr_digest}]"
+        [[ "$_acr_digest" != "" && "$_acr_digest" == "$_digest" ]] && echo "Nothing to import for $(baseRegistry)/$(baseImage)." && exit 0  # Nothing else to do
         # Import image if digest changed for tag
         echo "Importing $(baseRegistry)/$(baseImage):$(baseTag) ..."
         # acr import does not work with gcr (see: https://github.com/Azure/azure-cli/issues/9557)
