@@ -59,7 +59,7 @@ jobs:
         # Get current digest from target azure registry
         echo "Base registry current digest for $(baseImage):$(baseTag): [${_digest}]"
         _acr_digest=$(az acr repository show-manifests -n $(acrName) --repository $(targetImage) \
-          --query '[?not_null(tags[])]|[?contains(tags, `8-alpine`)].digest|[0]' |tr -d '"[:blank:]' |xargs echo -n)
+          --query '[?not_null(tags[])]|[?contains(tags, `$(baseTag)`)].digest|[0]' |tr -d '"[:blank:]' |xargs echo -n)
         echo "Target registry current digest for $(baseImage):$(baseTag): [${_acr_digest}]"
         [[ "$_acr_digest" != "" && "$_acr_digest" == "$_digest" ]] && echo "Nothing to import for $(baseRegistry)/$(baseImage)." && exit 0  # Nothing else to do
         #[[ $? -ne 0 ]] && exit 11
@@ -69,13 +69,13 @@ jobs:
         echo "##vso[task.setvariable variable=baseDigest]${_digest:7:6}"
 
   - task: Docker@2
-    displayName: 'Import gcr image (pull)'
+    displayName: 'Import gcr image (pull)' # acr import does not work with gcr (see: https://github.com/Azure/azure-cli/issues/9557)
     condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'gcr'))
     inputs:
       command: pull
       repository: $(baseRegistry)/$(baseImage)
       tags: $(baseTag)
-      #arguments: --secret id=mysecret,src=mysecret.txt
+      arguments: $(baseRegistry)/$(baseImage):$(baseTag)
 
   - task: Docker@2
     displayName: 'Import gcr image (tag)'
@@ -84,7 +84,7 @@ jobs:
       command: tag
       repository: $(baseRegistry)/$(baseImage)
       tags: $(baseTag)
-      arguments: $(targetRegistry)/$(targetImage):$(baseTag)-$(baseDigest)
+      arguments: $(baseRegistry)/$(baseImage):$(baseTag) $(targetRegistry)/$(targetImage):$(baseTag)-$(baseDigest)
 
   - task: Docker@2
     displayName: 'Import gcr image (push)'
@@ -93,6 +93,7 @@ jobs:
       command: push
       repository: $(targetRegistry)/$(targetImage)
       tags: $(baseTag)-$(baseDigest)
+      arguments: $(targetRegistry)/$(targetImage):$(baseTag)-$(baseDigest)
 
   - task: AzureCLI@1
     displayName: 'Import docker image'
