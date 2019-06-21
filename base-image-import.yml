@@ -11,6 +11,8 @@ variables:
 
 jobs:
 - job:
+  pool:
+    vmImage: 'Ubuntu 16.04'
   strategy:
     maxParallel: 3
     matrix: 
@@ -46,12 +48,12 @@ jobs:
           _token=$(curl --silent "https://auth.docker.io/token?scope=repository:$(baseImage):pull&service=registry.docker.io" | jq -r '.token')
           _digest=$(curl -i --silent --header "Accept: application/vnd.docker.distribution.manifest.v2+json" --header "Authorization: Bearer $_token" \
             "https://registry-1.docker.io/v2/$(baseImage)/manifests/$(baseTag)" |grep -i '[Dd]ocker-[Cc]ontent-[Dd]igest:' \
-            |sed 's/[Dd]ocker-[Cc]ontent-[Dd]igest: *\(sha256:[a-zA-Z0-9]*\)/\1/' |xargs echo -n)
+            |sed 's/[Dd]ocker-[Cc]ontent-[Dd]igest: *\(sha256:[a-zA-Z0-9]*\)/\1/' |tr -d '\r\n')
           echo "D: [$_digest]"
         else
           # google registry (gcr)
           _digest=$(curl -i --silent "https://gcr.io/v2/$(baseImage)/manifests/$(baseTag)" |grep -i '[Dd]ocker-[Cc]ontent-[Dd]igest:' \
-            |sed 's/[Dd]ocker-[Cc]ontent-[Dd]igest: *\(sha256:[a-zA-Z0-9]*\)/\1/')
+            |sed 's/[Dd]ocker-[Cc]ontent-[Dd]igest: *\(sha256:[a-zA-Z0-9]*\)/\1/' |tr -d '\r\n')
         fi
         [ "$_digest" == "" ] && echo "Error: cannot get image digest for $(baseImage):$(baseTag)" && exit 1
         # Get current digest from target azure registry
