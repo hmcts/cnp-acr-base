@@ -21,49 +21,54 @@ jobs:
         baseRegistry: docker.io
         baseTag: 8-alpine
         baseImageType: docker  # docker or gcr
-        targetImage: hmcts/base/node/alpine-lts-8
+        targetImage: hmcts/library/node-alpine-lts-8
       node-10-alpine:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 10-alpine
         baseImageType: docker  # docker or gcr
-        targetImage: hmcts/base/node/alpine-lts-10
+        targetImage: hmcts/library/node-alpine-lts-10
       node-8-stretch-slim:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 8-stretch-slim
         baseImageType: docker  # docker or gcr
-        targetImage: hmcts/base/node/stretch-slim-lts-8
+        targetImage: hmcts/library/node-stretch-slim-lts-8
       node-10-stretch-slim:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 10-stretch-slim
         baseImageType: docker  # docker or gcr
-        targetImage: hmcts/base/node/stretch-slim-lts-10
+        targetImage: hmcts/library/node-stretch-slim-lts-10
       openjdk-8-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 8
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/base/java/distroless-8
+        targetImage: hmcts/library/java-distroless-8
+        #cnpGitRepository: https://github.com/hmcts/cnp-java-base
+        #cnpDockerfile: distroless/Dockerfile
+        #cnpDockerBuildArgs: --build-arg APP_INSIGHTS_AGENT_VERSION=2.3.1 --build-arg version=8
+        #cnpImage: hmcts/cnp-java-base
+        #cnpTag: openjdk-8-distroless-1.0      
       openjdk-8-debug-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 8-debug
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/base/java/distroless-8
+        targetImage: hmcts/library/java-distroless-8
       openjdk-11-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 11
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/base/java/distroless-11
+        targetImage: hmcts/library/java-distroless-11
       openjdk-11-debug-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 11-debug
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/base/java/distroless-11
+        targetImage: hmcts/library/java-distroless-11
   steps:
   - task: AzureCLI@1
     displayName: 'Check base registry if new digest available for tag'
