@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x
 
 baseTag=$1
 targetImage=$2
