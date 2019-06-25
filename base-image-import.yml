@@ -71,7 +71,7 @@ jobs:
       azureSubscription: azurerm-nonprod
       scriptLocation: 'scriptPath'
       scriptPath: check-base-tag.sh
-      arguments: $(baseImage) $(baseRegistry) $(baseTag) $(baseImageType) $(targetImage)
+      arguments: $(baseImage) $(baseRegistry) $(baseTag) $(baseImageType) $(targetImage) $(acrName) $(targetRegistry)
 
   - task: AzureCLI@1
     displayName: 'Import gcr image' # acr import does not work with gcr (see: https://github.com/Azure/azure-cli/issues/9557)

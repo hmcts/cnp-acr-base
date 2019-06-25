@@ -1,13 +1,14 @@
 #!/bin/bash
 
 set -e
-set -x 
 
 baseImage=$1
 baseRegistry=$2
 baseTag=$3
 baseImageType=$4
 targetImage=$5
+acrName=$6
+targetRegistry=$7
 
 # Get digest for tag from base registry (e.g. docker)
 if [ ${baseImageType} == "docker" ]
