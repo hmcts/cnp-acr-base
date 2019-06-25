@@ -45,30 +45,25 @@ jobs:
         baseRegistry: gcr.io
         baseTag: 8
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/library/java-distroless-8
-        #cnpGitRepository: https://github.com/hmcts/cnp-java-base
-        #cnpDockerfile: distroless/Dockerfile
-        #cnpDockerBuildArgs: --build-arg APP_INSIGHTS_AGENT_VERSION=2.3.1 --build-arg version=8
-        #cnpImage: hmcts/cnp-java-base
-        #cnpTag: openjdk-8-distroless-1.0      
+        targetImage: hmcts/library/java-distroless
       openjdk-8-debug-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 8-debug
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/library/java-distroless-8
+        targetImage: hmcts/library/java-distroless
       openjdk-11-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 11
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/library/java-distroless-11
+        targetImage: hmcts/library/java-distroless
       openjdk-11-debug-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 11-debug
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/library/java-distroless-11
+        targetImage: hmcts/library/java-distroless
   steps:
   - task: AzureCLI@1
     displayName: 'Check base registry if new digest available for tag'
