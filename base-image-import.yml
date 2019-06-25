@@ -71,7 +71,8 @@ jobs:
       azureSubscription: azurerm-nonprod
       scriptLocation: 'scriptPath'
       scriptPath: check-base-tag.sh
-      arguments: $(baseImage) $(baseRegistry) $(baseTag) $(targetImage) $(baseImageType) $(acrName)
+      arguments: |
+        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(baseImageType)" "$(acrName)"
 
   - task: AzureCLI@1
     displayName: 'Import gcr image' # acr import does not work with gcr (see: https://github.com/Azure/azure-cli/issues/9557)
@@ -80,7 +81,8 @@ jobs:
       azureSubscription: azurerm-nonprod
       scriptLocation: 'scriptPath'
       scriptPath: import-gcr-image.sh
-      arguments: $(baseImage) $(baseRegistry) $(baseTag) $(targetImage) $(acrName) $(targetRegistry) $(baseDigest)
+      arguments: |
+        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)"
 
   - task: AzureCLI@1
     displayName: 'Import docker image'
@@ -109,4 +111,5 @@ jobs:
       azureSubscription: azurerm-nonprod
       scriptLocation: 'scriptPath'
       scriptPath: tag-new-image.sh
-      arguments: $(baseTag) $(targetImage) $(acrName) $(targetRegistry) $(acrDigest) $(baseDigest)
+      arguments: |
+        "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(acrDigest)" "$(baseDigest)"
