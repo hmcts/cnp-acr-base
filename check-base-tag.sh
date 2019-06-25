@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e
-set -x
 
 baseImage=$1
 baseRegistry=$2
@@ -29,7 +28,7 @@ fi
 # Get current digest from target azure registry
 echo "Base registry current digest for ${baseImage}:${baseTag}: [${_digest}]"
 _acr_digest=$(az acr repository show-manifests -n ${acrName} --repository ${targetImage} \
-  --query "[?not_null(tags[])]|[?contains(tags, \`${baseTag}\`)].digest|[0]" |tr -d '"[:blank:]' |xargs echo -n)
+  --query "[?not_null(tags[])]|[?contains(tags, \`\"${baseTag}\"\`)].digest|[0]" |tr -d '"[:blank:]' |xargs echo -n)
 echo "Target registry current digest for ${baseImage}:${baseTag}: [${_acr_digest}]"
 
 [[ "$_acr_digest" != "" && "$_acr_digest" == "$_digest" ]] && echo "Nothing to import for ${baseRegistry}/${baseImage}." && exit 0  # Nothing else to do
