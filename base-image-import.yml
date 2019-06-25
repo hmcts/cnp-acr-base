@@ -112,4 +112,4 @@ jobs:
       scriptLocation: 'scriptPath'
       scriptPath: tag-new-image.sh
       arguments: |
-        "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(acrDigest)" "$(baseDigest)"
+        "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)" "$(acrDigest)" 
