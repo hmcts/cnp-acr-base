@@ -71,6 +71,7 @@ jobs:
       azureSubscription: azurerm-nonprod
       scriptLocation: 'inlineScript'
       inlineScript: |
+        set -e
         # Get digest for tag from base registry (e.g. docker)
         if [ $(baseImageType) == "docker" ]
         then
@@ -104,6 +105,7 @@ jobs:
       azureSubscription: azurerm-nonprod
       scriptLocation: 'inlineScript'
       inlineScript: |
+        set -e
         docker pull $(baseRegistry)/$(baseImage):$(baseTag)
         docker image tag $(baseRegistry)/$(baseImage):$(baseTag) $(targetRegistry)/$(targetImage):$(baseTag)-$(baseDigest)
         az acr login --name $(acrName)
@@ -136,6 +138,7 @@ jobs:
       azureSubscription: azurerm-nonprod
       scriptLocation: 'inlineScript'
       inlineScript: |
+        set -e
         # Move base tag to new image
         [ "$(acrDigest)" != "" ] && echo "Untagging previous $(baseTag) ..." && az acr repository untag -n $(acrName) --image $(targetImage):$(baseTag)
         echo "Tagging $(baseTag)-$(baseDigest) as $(baseTag) ..."
