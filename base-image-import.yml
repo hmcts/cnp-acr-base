@@ -78,13 +78,9 @@ jobs:
     condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'gcr'))
     inputs:
       azureSubscription: azurerm-nonprod
-      scriptLocation: 'inlineScript'
-      inlineScript: |
-        set -e
-        docker pull $(baseRegistry)/$(baseImage):$(baseTag)
-        docker image tag $(baseRegistry)/$(baseImage):$(baseTag) $(targetRegistry)/$(targetImage):$(baseTag)-$(baseDigest)
-        az acr login --name $(acrName)
-        docker push $(targetRegistry)/$(targetImage):$(baseTag)-$(baseDigest)
+      scriptLocation: 'scriptPath'
+      scriptPath: import-gcr-image.sh
+      arguments: $(baseImage) $(baseRegistry) $(baseTag) $(baseImageType) $(targetImage) $(acrName) $(targetRegistry)
 
   - task: AzureCLI@1
     displayName: 'Import docker image'
@@ -111,11 +107,6 @@ jobs:
     condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: azurerm-nonprod
-      scriptLocation: 'inlineScript'
-      inlineScript: |
-        set -e
-        # Move base tag to new image
-        [ "$(acrDigest)" != "" ] && echo "Untagging previous $(baseTag) ..." && az acr repository untag -n $(acrName) --image $(targetImage):$(baseTag)
-        echo "Tagging $(baseTag)-$(baseDigest) as $(baseTag) ..."
-        az acr import --name $(acrName) --source $(targetRegistry)/$(targetImage):$(baseTag)-$(baseDigest) --image $(targetImage):$(baseTag) 
-        echo "Done."
+      scriptLocation: 'scriptPath'
+      scriptPath: tag-new-image.sh
+      arguments: $(baseImage) $(baseRegistry) $(baseTag) $(baseImageType) $(targetImage) $(acrName) $(targetRegistry)
