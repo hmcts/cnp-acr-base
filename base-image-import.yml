@@ -4,6 +4,12 @@
 name: ACR base image import
 trigger: none
 pr: none
+schedules:
+- cron: "0 1 * * *"
+  displayName: Daily build
+  branches:
+    include:
+    - master
 variables:
   environment: 'nonprod'
   acrName: hmctspublic
