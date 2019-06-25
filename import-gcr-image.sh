@@ -5,11 +5,10 @@ set -e
 baseImage=$1
 baseRegistry=$2
 baseTag=$3
-baseImageType=$4
-targetImage=$5
-acrName=$6
-targetRegistry=$7
-
+targetImage=$4
+acrName=$5
+targetRegistry=$6
+baseDigest=$7
 
 # acr import does not work with gcr (see: https://github.com/Azure/azure-cli/issues/9557)
 

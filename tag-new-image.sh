@@ -2,14 +2,12 @@
 
 set -e
 
-baseImage=$1
-baseRegistry=$2
-baseTag=$3
-baseImageType=$4
-targetImage=$5
-acrName=$6
-targetRegistry=$7
-
+baseTag=$1
+targetImage=$2
+acrName=$3
+targetRegistry=$4
+acrDigest=$5
+baseDigest=$6
 
 # Move base tag to new image
 [ "${acrDigest}" != "" ] && echo "Untagging previous ${baseTag} ..." && az acr repository untag -n ${acrName} --image ${targetImage}:${baseTag}
