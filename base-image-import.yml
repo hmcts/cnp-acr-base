@@ -10,6 +10,7 @@ schedules:
   branches:
     include:
     - master
+  always: true
 variables:
   environment: 'nonprod'
   acrName: hmctspublic
