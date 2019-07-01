@@ -15,6 +15,9 @@ variables:
   environment: 'nonprod'
   acrName: hmctspublic
   targetRegistry: hmctspublic.azurecr.io
+  keyvaultName: 'infra-vault-nonprod'
+  serviceConnection: 'azurerm-nonprod'
+  neuvectorController: 'https://neuvector.service.core-compute-aat.internal/api'
 
 jobs:
 - job:
@@ -72,6 +75,13 @@ jobs:
         baseImageType: gcr  # docker or gcr
         targetImage: hmcts/library/java-distroless
   steps:
+  - task: AzureKeyVault@1
+    displayName: 'Get secrets from Keyvault'
+    inputs:
+      azureSubscription: $(serviceConnection)
+      keyVaultName: $(keyvaultName)
+      secretsFilter: 'registry-public-username,registry-public-password,registry-slack-webhook,neuvector-username,neuvector-password'
+  
   - task: AzureCLI@1
     displayName: 'Check base registry if new digest available for tag'
     inputs:
@@ -106,10 +116,11 @@ jobs:
     condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: azurerm-nonprod
-      scriptLocation: 'inlineScript'
-      inlineScript: |
-        # Scan new image. Only execute next step if this passes. Otherwise notify ...
-        echo "This is a placeholder for NeuVector image scan"
+      scriptLocation: 'scriptPath'
+      scriptPath: base-image-scan.sh
+      arguments: |
+        "$(targetRegistry)" "$(targetImage)" "$(baseTag)" "$(registry-public-username)" "$(registry-public-password)" 
+        "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-username)" "$(neuvector-password)"
 
   - task: AzureCLI@1
     displayName: 'Re-tag new image using the base tag'
