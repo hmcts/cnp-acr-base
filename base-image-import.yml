@@ -12,11 +12,11 @@ schedules:
     - master
   always: true
 variables:
-  environment: 'nonprod'
+  environment: 'prod'
   acrName: hmctspublic
   targetRegistry: hmctspublic.azurecr.io
-  keyvaultName: 'infra-vault-nonprod'
-  serviceConnection: 'azurerm-nonprod'
+  keyvaultName: 'infra-vault-prod'
+  serviceConnection: 'azurerm-prod'
   neuvectorController: 'https://neuvector.service.core-compute-aat.internal/api'
 
 jobs:
