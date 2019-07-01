@@ -14,7 +14,7 @@ scannerPassword=$9
 
 
 _token=$(curl -s -k -H "Content-Type: application/json" -d "{\"password\": {\"username\": \"${scannerUsername}\", \"password\": \"${scannerPassword}\"}}" \
-  "${scannerUrl}/v1/auth" | jq .token.token)
+  "${scannerUrl}/v1/auth" | jq .token.token |sed 's/"//g')
 
 [[ "${_token}" == "" ]] && echo "Authentication to image scanner failed." && exit 1
 
