@@ -2,7 +2,8 @@
 # Import new image on base image update
 #
 name: ACR base image import
-trigger: none
+trigger:
+  - master
 pr: none
 schedules:
 - cron: "0 1 * * *"
