@@ -22,7 +22,6 @@ variables:
 jobs:
 - job:
   pool:
-    #vmImage: 'Ubuntu 16.04'
     name: hmcts-agent-pool
   strategy:
     maxParallel: 4
