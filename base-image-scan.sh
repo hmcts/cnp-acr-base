@@ -32,7 +32,7 @@ _critical_severity=$(echo $_scan_results | jq '[.report.vulnerabilities[] | sele
 _num_high=$(echo $_high_severity |jq '. | length')
 _num_critical=$(echo $_critical_severity |jq '. | length')
 
-if (("$_num_high" > 0 or "$_num_critical" > 0))
+if (("$_num_high" > 0 || "$_num_critical" > 0))
 then
   _msg_text="Scanned new image ${targetRegistry}/${targetImage}:${baseTag}. *High severity: ${_num_high}*. *Critical severity: ${_num_critical}*."
 else
