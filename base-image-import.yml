@@ -124,7 +124,7 @@ jobs:
 
   - task: AzureCLI@1
     displayName: 'Re-tag new image using the base tag'
-    condition: eq(variables['newTagFound'], 'true')
+    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['scanPassed'], 'true'))
     inputs:
       azureSubscription: azurerm-nonprod
       scriptLocation: 'scriptPath'
