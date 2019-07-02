@@ -12,6 +12,9 @@ scannerUrl=$7
 scannerUsername=$8
 scannerPassword=$9
 
+# test only. to remove after first run
+curl -v -k -H "Content-Type: application/json" -d "{\"password\": {\"username\": \"${scannerUsername}\", \"password\": \"invalid\"}}" \
+  "${scannerUrl}/v1/auth"
 
 _token=$(curl -s -k -H "Content-Type: application/json" -d "{\"password\": {\"username\": \"${scannerUsername}\", \"password\": \"${scannerPassword}\"}}" \
   "${scannerUrl}/v1/auth" | jq .token.token |sed 's/"//g')
@@ -40,3 +43,5 @@ fi
 curl -X POST --data-urlencode "payload={\"channel\": \"#acr-tasks-monitoring\", \"username\": \"NeuVector\", \"text\": \"${_msg_text}\", \"icon_emoji\": \":liam_is_watching:\"}" \
   ${registrySlackWebhook}
 
+# Export variables for next stages
+echo "##vso[task.setvariable variable=scanPassed]true" 
