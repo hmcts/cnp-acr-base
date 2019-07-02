@@ -18,4 +18,6 @@ docker image tag ${baseRegistry}/${baseImage}:${baseTag} ${targetRegistry}/${tar
 
 az acr login --name ${acrName}
 
+az acr repository delete --yes -n ${acrName} --image ${targetImage}:${baseTag}-${baseDigest} 2> /dev/null && echo "Removed existing (stale) tag."
+
 docker push ${targetRegistry}/${targetImage}:${baseTag}-${baseDigest}
