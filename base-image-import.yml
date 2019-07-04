@@ -13,11 +13,10 @@ schedules:
     - master
   always: true
 variables:
-  environment: 'nonprod'
   acrName: hmctspublic
   targetRegistry: hmctspublic.azurecr.io
-  keyvaultName: 'infra-vault-nonprod'
-  serviceConnection: 'azurerm-nonprod'
+  keyvaultName: 'infra-vault-prod'
+  serviceConnection: 'azurerm-prod'
   neuvectorController: 'https://neuvector.service.core-compute-aat.internal/api'
 
 jobs:
@@ -86,7 +85,7 @@ jobs:
   - task: AzureCLI@1
     displayName: 'Check base registry if new digest available for tag'
     inputs:
-      azureSubscription: azurerm-nonprod
+      azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'
       scriptPath: check-base-tag.sh
       arguments: |
@@ -96,7 +95,7 @@ jobs:
     displayName: 'Import gcr image' # acr import does not work with gcr (see: https://github.com/Azure/azure-cli/issues/9557)
     condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'gcr'))
     inputs:
-      azureSubscription: azurerm-nonprod
+      azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'
       scriptPath: import-gcr-image.sh
       arguments: |
@@ -106,7 +105,7 @@ jobs:
     displayName: 'Import docker image'
     condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'docker'))
     inputs:
-      azureSubscription: azurerm-nonprod
+      azureSubscription: $(serviceConnection)
       scriptLocation: 'inlineScript'
       inlineScript: |
         echo "Importing $(baseRegistry)/$(baseImage):$(baseTag) ..."
@@ -116,7 +115,7 @@ jobs:
     displayName: 'Security scan new image'
     condition: eq(variables['newTagFound'], 'true')
     inputs:
-      azureSubscription: azurerm-nonprod
+      azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'
       scriptPath: base-image-scan.sh
       arguments: |
@@ -127,7 +126,7 @@ jobs:
     displayName: 'Re-tag new image using the base tag'
     condition: and(eq(variables['newTagFound'], 'true'), eq(variables['scanPassed'], 'true'))
     inputs:
-      azureSubscription: azurerm-nonprod
+      azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'
       scriptPath: tag-new-image.sh
       arguments: |
