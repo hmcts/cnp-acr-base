@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x
 
 targetRegistry=$1
 targetImage=$2
@@ -20,7 +21,7 @@ _token=$(curl -s -k -H "Content-Type: application/json" -d "{\"password\": {\"us
 [[ "${_token}" == "" ]] && echo "Authentication to image scanner failed." && exit 1
 
 echo "Scanning image ${targetImage} ..."
-_scan_results=$(curl -s -k -H 'Content-Type: application/json' -H "X-Auth-Token: $_token" \
+_scan_results=$(curl -v -k -H 'Content-Type: application/json' -H "X-Auth-Token: $_token" \
   -d "{\"request\":{\"registry\":\"https://${targetRegistry}\",\"repository\":\"${targetImage}\",\"tag\":\"${baseTag}\",\"username\":\"${registryPublicUsername}\",\"password\":\"${registryPublicPassword}\"}}" \
   "${scannerUrl}/v1/scan/repository") 
 
