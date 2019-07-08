@@ -31,49 +31,49 @@ jobs:
         baseRegistry: docker.io
         baseTag: 8-alpine
         baseImageType: docker  # docker or gcr
-        targetImage: hmcts/library/node-alpine-lts-8
+        targetImage: imported/library/node-alpine-lts-8
       node-10-alpine:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 10-alpine
         baseImageType: docker  # docker or gcr
-        targetImage: hmcts/library/node-alpine-lts-10
+        targetImage: imported/library/node-alpine-lts-10
       node-8-stretch-slim:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 8-stretch-slim
         baseImageType: docker  # docker or gcr
-        targetImage: hmcts/library/node-stretch-slim-lts-8
+        targetImage: imported/library/node-stretch-slim-lts-8
       node-10-stretch-slim:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 10-stretch-slim
         baseImageType: docker  # docker or gcr
-        targetImage: hmcts/library/node-stretch-slim-lts-10
+        targetImage: imported/library/node-stretch-slim-lts-10
       openjdk-8-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 8
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/library/java-distroless
+        targetImage: imported/distroless/java
       openjdk-8-debug-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 8-debug
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/library/java-distroless
+        targetImage: imported/distroless/java
       openjdk-11-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 11
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/library/java-distroless
+        targetImage: imported/distroless/java
       openjdk-11-debug-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 11-debug
         baseImageType: gcr  # docker or gcr
-        targetImage: hmcts/library/java-distroless
+        targetImage: imported/distroless/java
   steps:
   - task: AzureKeyVault@1
     displayName: 'Get secrets from Keyvault'
