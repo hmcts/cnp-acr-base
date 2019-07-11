@@ -6,12 +6,12 @@ trigger:
   - master
 pr: none
 schedules:
-- cron: '0 1 * * *'
+- cron: '* * * * *'
   displayName: Daily build
   branches:
     include:
     - master
-  always: true
+  always: 'true'
 variables:
   acrName: hmctspublic
   targetRegistry: hmctspublic.azurecr.io
