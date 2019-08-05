@@ -1,7 +1,7 @@
 #
 ## Import new image on base image update
 ##
-name: ACR base image import
+name: ACR base image import 
 trigger:
   - master
 pr: none
