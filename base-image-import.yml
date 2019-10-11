@@ -17,7 +17,7 @@ variables:
   targetRegistry: hmctspublic.azurecr.io
   keyvaultName: 'infra-vault-prod'
   serviceConnection: 'azurerm-prod'
-  neuvectorController: 'https://neuvector00.service.core-compute-aat.internal/api'
+  neuvectorController: 'https://neuvector01.service.core-compute-aat.internal/api'
 
 jobs:
 - job:
