@@ -40,7 +40,7 @@ else
 fi
 echo "Scan summary: [${_msg_text}]"
 
-curl -X POST --data-urlencode "payload={\"channel\": \"#acr-tasks-monitoring\", \"username\": \"NeuVector\", \"text\": \"${_msg_text}\", \"icon_emoji\": \":liam_is_watching:\"}" \
+curl -X POST --data-urlencode "payload={\"channel\": \"#acr-tasks-monitoring\", \"username\": \"NeuVector\", \"text\": \"${_msg_text}\", \"icon_emoji\": \":tim-webster:\"}" \
   ${registrySlackWebhook}
 
 # Export variables for next stages
