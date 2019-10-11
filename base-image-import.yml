@@ -16,6 +16,7 @@ variables:
   acrName: hmctspublic
   targetRegistry: hmctspublic.azurecr.io
   keyvaultName: 'infra-vault-prod'
+  keyvaultNameStg: 'cftapps-stg'
   serviceConnection: 'azurerm-prod'
   neuvectorController: 'https://neuvector01.service.core-compute-aat.internal/api'
 
@@ -80,8 +81,25 @@ jobs:
     inputs:
       azureSubscription: $(serviceConnection)
       keyVaultName: $(keyvaultName)
-      secretsFilter: 'registry-public-username,registry-public-password,registry-slack-webhook,neuvector-username,neuvector-password'
+      secretsFilter: 'registry-public-username,registry-public-password,registry-slack-webhook'
   
+  - task: AzureKeyVault@1
+    displayName: 'Get secrets from Keyvault'
+    inputs:
+      azureSubscription: $(serviceConnection)
+      keyVaultName: $(keyvaultNameStg)
+      secretsFilter: 'neuvector-admin-username,neuvector-admin-password'
+  
+  - task: AzureCLI@1
+    displayName: 'Notify start'
+    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'docker'))
+    inputs:
+      azureSubscription: $(serviceConnection)
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        echo "Starting base images import task ..."
+        curl -X POST --data-urlencode 'payload={"channel": "#acr-tasks-monitoring", "username": "NeuVector", "text": "Base images import task. Starting...", "icon_emoji": ":liam_is_watching:"}' $(registry-slack-webhook)
+
   - task: AzureCLI@1
     displayName: 'Check base registry if new digest available for tag'
     inputs:
@@ -120,7 +138,7 @@ jobs:
       scriptPath: base-image-scan.sh
       arguments: |
         "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)" 
-        "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-username)" "$(neuvector-password)"
+        "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-admin-password)"
 
   - task: AzureCLI@1
     displayName: 'Re-tag new image using the base tag'
@@ -131,3 +149,13 @@ jobs:
       scriptPath: tag-new-image.sh
       arguments: |
         "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)" "$(acrDigest)" 
+
+  - task: AzureCLI@1
+    displayName: 'Notify finish'
+    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'docker'))
+    inputs:
+      azureSubscription: $(serviceConnection)
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        echo "Starting base images import task ..."
+        curl -X POST --data-urlencode 'payload={"channel": "#acr-tasks-monitoring", "username": "NeuVector", "text": "Base images import task. Completed", "icon_emoji": ":liam_is_watching:"}' $(registry-slack-webhook)
