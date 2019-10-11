@@ -150,17 +150,16 @@ jobs:
     inputs:
       azureSubscription: $(serviceConnection)
       keyVaultName: $(keyvaultName)
-      secretsFilter: 'registry-public-username,registry-public-password,registry-slack-webhook'
+      secretsFilter: 'registry-slack-webhook'
   
   - task: AzureCLI@1
     displayName: 'Notify error'
     inputs:
       azureSubscription: $(serviceConnection)
-      scriptLocation: 'inlineScript'
-      inlineScript: |
-        curl -X POST --data-urlencode \
-          'payload={"channel": "#acr-tasks-monitoring", "username": "NeuVector", "text": "Error running base images import task", "icon_emoji": ":liam_is_watching:"}' \
-          $(registry-slack-webhook)
+      scriptLocation: 'scriptPath'
+      scriptPath: slack-notify.sh
+      arguments: |
+        "Error running base images import task." "$(registry-slack-webhook)" 
 
 - job: NotifySuccess
   dependsOn: ImportBaseImages
@@ -171,14 +170,13 @@ jobs:
     inputs:
       azureSubscription: $(serviceConnection)
       keyVaultName: $(keyvaultName)
-      secretsFilter: 'registry-public-username,registry-public-password,registry-slack-webhook'
+      secretsFilter: 'registry-slack-webhook'
   
   - task: AzureCLI@1
     displayName: 'Notify success'
     inputs:
       azureSubscription: $(serviceConnection)
-      scriptLocation: 'inlineScript'
-      inlineScript: |
-        curl -X POST --data-urlencode \
-          'payload={"channel": "#acr-tasks-monitoring", "username": "NeuVector", "text": "Completed base images import task", "icon_emoji": ":tim-webster:"}' \
-          $(registry-slack-webhook)
+      scriptLocation: 'scriptPath'
+      scriptPath: slack-notify.sh
+      arguments: |
+        "Completed base images import task." "$(registry-slack-webhook)" 
