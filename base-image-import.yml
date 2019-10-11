@@ -16,8 +16,9 @@ variables:
   acrName: hmctspublic
   targetRegistry: hmctspublic.azurecr.io
   keyvaultName: 'infra-vault-prod'
-  keyvaultNameStg: 'cftapps-stg'
   serviceConnection: 'azurerm-prod'
+  keyvaultNameStg: 'cftapps-stg'
+  serviceConnectionStg: 'DCD-CFTAPPS-STG'
   neuvectorController: 'https://neuvector01.service.core-compute-aat.internal/api'
 
 jobs:
@@ -86,7 +87,7 @@ jobs:
   - task: AzureKeyVault@1
     displayName: 'Get secrets from Keyvault'
     inputs:
-      azureSubscription: $(serviceConnection)
+      azureSubscription: $(serviceConnectionStg)
       keyVaultName: $(keyvaultNameStg)
       secretsFilter: 'neuvector-admin-username,neuvector-new-admin-password'
   
