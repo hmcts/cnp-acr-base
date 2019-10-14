@@ -57,7 +57,7 @@ jobs:
         baseRegistry: gcr.io
         baseTag: 8
         baseImageType: gcr  # docker or gcr
-        targetImage: imported/distroless/java
+        targetImage: imported/distroless/jav
       openjdk-8-debug-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
