@@ -53,7 +53,7 @@ jobs:
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node-stretch-slim-lts-10
       openjdk-8-distroless:
-        baseImage: distroless/jav
+        baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 8
         baseImageType: gcr  # docker or gcr
