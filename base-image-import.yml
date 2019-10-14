@@ -142,6 +142,8 @@ jobs:
         "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)" "$(acrDigest)" 
 
 - job: NotifyFailure
+  pool:
+    name: hmcts-agent-pool
   dependsOn: ImportBaseImages
   condition: failed() # this job will only run if import fails
   steps:
@@ -162,6 +164,8 @@ jobs:
         "Error running base images import task." "$(registry-slack-webhook)" 
 
 - job: NotifySuccess
+  pool:
+    name: hmcts-agent-pool
   dependsOn: ImportBaseImages
   condition: succeeded() # this job will only run if import succeeds
   steps:
