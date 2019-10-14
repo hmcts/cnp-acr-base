@@ -53,7 +53,7 @@ jobs:
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node-stretch-slim-lts-10
       openjdk-8-distroless:
-        baseImage: distroless/jav
+        baseImage: distroless/java
         baseRegistry: gcr.io
         baseTag: 8
         baseImageType: gcr  # docker or gcr
@@ -161,7 +161,7 @@ jobs:
       scriptLocation: 'scriptPath'
       scriptPath: slack-notify.sh
       arguments: |
-        "Error running base images import task." "$(registry-slack-webhook)" 
+        "Error running base images import task." "$(registry-slack-webhook)" "liam_is_watching"
 
 - job: NotifySuccess
   pool:
@@ -183,4 +183,4 @@ jobs:
       scriptLocation: 'scriptPath'
       scriptPath: slack-notify.sh
       arguments: |
-        "Completed base images import task." "$(registry-slack-webhook)" 
+        "Completed base images import task." "$(registry-slack-webhook)" "tim-webster"
