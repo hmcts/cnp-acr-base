@@ -58,7 +58,7 @@ jobs:
         baseTag: 10-stretch-slim
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
-      node-10-stretch-slim:
+      node-12-stretch-slim:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 12-stretch-slim
