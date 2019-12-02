@@ -31,19 +31,19 @@ jobs:
       node-8-alpine:
         baseImage: library/node
         baseRegistry: docker.io
-        baseTag: 8-alpine3.10
+        baseTag: 8-alpine
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
       node-10-alpine:
         baseImage: library/node
         baseRegistry: docker.io
-        baseTag: 10-alpine3.10
+        baseTag: 10-alpine
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
       node-12-alpine:
         baseImage: library/node
         baseRegistry: docker.io
-        baseTag: 12-alpine3.10
+        baseTag: 12-alpine
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
       node-8-stretch-slim:
