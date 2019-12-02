@@ -31,27 +31,39 @@ jobs:
       node-8-alpine:
         baseImage: library/node
         baseRegistry: docker.io
-        baseTag: 8-alpine
+        baseTag: 8-alpine3.10
         baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node-alpine-lts-8
+        targetImage: imported/library/node
       node-10-alpine:
         baseImage: library/node
         baseRegistry: docker.io
-        baseTag: 10-alpine
+        baseTag: 10-alpine3.10
         baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node-alpine-lts-10
+        targetImage: imported/library/node
+      node-12-alpine:
+        baseImage: library/node
+        baseRegistry: docker.io
+        baseTag: 12-alpine3.10
+        baseImageType: docker  # docker or gcr
+        targetImage: imported/library/node
       node-8-stretch-slim:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 8-stretch-slim
         baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node-stretch-slim-lts-8
+        targetImage: imported/library/node
       node-10-stretch-slim:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 10-stretch-slim
         baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node-stretch-slim-lts-10
+        targetImage: imported/library/node
+      node-12-stretch-slim:
+        baseImage: library/node
+        baseRegistry: docker.io
+        baseTag: 12-stretch-slim
+        baseImageType: docker  # docker or gcr
+        targetImage: imported/library/node
       openjdk-8-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
