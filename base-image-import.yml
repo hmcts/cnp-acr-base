@@ -26,7 +26,7 @@ jobs:
   pool:
     name: hmcts-agent-pool
   strategy:
-    maxParallel: 4
+    maxParallel: 2
     matrix: 
       node-8-alpine:
         baseImage: library/node
