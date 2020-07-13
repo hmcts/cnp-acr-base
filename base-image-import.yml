@@ -28,12 +28,6 @@ jobs:
   strategy:
     maxParallel: 2
     matrix: 
-      node-8-alpine:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 8-alpine
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
       node-10-alpine:
         baseImage: library/node
         baseRegistry: docker.io
@@ -44,24 +38,6 @@ jobs:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 12-alpine
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
-      node-8-stretch-slim:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 8-stretch-slim
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
-      node-10-stretch-slim:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 10-stretch-slim
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
-      node-12-stretch-slim:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 12-stretch-slim
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
       node-12-buster-slim:
