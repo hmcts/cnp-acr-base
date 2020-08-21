@@ -46,6 +46,18 @@ jobs:
         baseTag: 12-buster-slim
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
+      node-14-alpine:
+        baseImage: library/node
+        baseRegistry: docker.io
+        baseTag: 14-alpine
+        baseImageType: docker  # docker or gcr
+        targetImage: imported/library/node
+      node-14-buster-slim:
+        baseImage: library/node
+        baseRegistry: docker.io
+        baseTag: 14-buster-slim
+        baseImageType: docker  # docker or gcr
+        targetImage: imported/library/node
       openjdk-8-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
