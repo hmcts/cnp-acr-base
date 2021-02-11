@@ -24,7 +24,7 @@ variables:
 jobs:
 - job: ImportBaseImages
   pool:
-    name: hmcts-agent-pool
+    name: hmcts-cftptl-agent-pool
   strategy:
     maxParallel: 2
     matrix: 
@@ -149,7 +149,7 @@ jobs:
 
 - job: NotifyFailure
   pool:
-    name: hmcts-agent-pool
+    name: hmcts-cftptl-agent-pool
   dependsOn: ImportBaseImages
   condition: failed() # this job will only run if import fails
   steps:
@@ -171,7 +171,7 @@ jobs:
 
 - job: NotifySuccess
   pool:
-    name: hmcts-agent-pool
+    name: hmcts-cftptl-agent-pool
   dependsOn: ImportBaseImages
   condition: succeeded() # this job will only run if import succeeds
   steps:
