@@ -28,54 +28,6 @@ jobs:
   strategy:
     maxParallel: 2
     matrix: 
-      node-10-alpine:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 10-alpine
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
-      node-12-alpine:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 12-alpine
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
-      node-12-buster-slim:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 12-buster-slim
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
-      node-14-alpine:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 14-alpine
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
-      node-14-buster-slim:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 14-buster-slim
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
-      openjdk-8-distroless:
-        baseImage: distroless/java
-        baseRegistry: gcr.io
-        baseTag: 8
-        baseImageType: gcr  # docker or gcr
-        targetImage: imported/distroless/java
-      openjdk-8-debug-distroless:
-        baseImage: distroless/java
-        baseRegistry: gcr.io
-        baseTag: 8-debug
-        baseImageType: gcr  # docker or gcr
-        targetImage: imported/distroless/java
-      openjdk-11-distroless:
-        baseImage: distroless/java
-        baseRegistry: gcr.io
-        baseTag: 11
-        baseImageType: gcr  # docker or gcr
-        targetImage: imported/distroless/java
       openjdk-11-debug-distroless:
         baseImage: distroless/java
         baseRegistry: gcr.io
