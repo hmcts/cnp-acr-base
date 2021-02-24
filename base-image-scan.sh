@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 targetRegistry=$1
 targetImage=$2
