@@ -57,20 +57,10 @@ jobs:
       scriptPath: check-base-tag.sh
       arguments: |
         "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(baseImageType)" "$(acrName)"
-
-  - task: AzureCLI@1
-    displayName: 'Import gcr image' # acr import does not work with gcr (see: https://github.com/Azure/azure-cli/issues/9557)
-    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'gcr'))
-    inputs:
-      azureSubscription: $(serviceConnection)
-      scriptLocation: 'scriptPath'
-      scriptPath: import-gcr-image.sh
-      arguments: |
-        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)"
-
+        
   - task: AzureCLI@1
     displayName: 'Import docker image'
-    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'docker'))
+    condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'inlineScript'
