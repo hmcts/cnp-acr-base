@@ -19,7 +19,7 @@ variables:
   serviceConnection: 'azurerm-prod'
   keyvaultNameStg: 'cftapps-stg'
   serviceConnectionStg: 'DCD-CFTAPPS-STG'
-  neuvectorController: 'https://neuvector00.service.core-compute-aat.internal/api'
+  neuvectorController: 'https://neuvector01.service.core-compute-aat.internal/api'
 
 jobs:
 - job: ImportBaseImages
@@ -107,18 +107,8 @@ jobs:
         "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(baseImageType)" "$(acrName)"
 
   - task: AzureCLI@1
-    displayName: 'Import gcr image' # acr import does not work with gcr (see: https://github.com/Azure/azure-cli/issues/9557)
-    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'gcr'))
-    inputs:
-      azureSubscription: $(serviceConnection)
-      scriptLocation: 'scriptPath'
-      scriptPath: import-gcr-image.sh
-      arguments: |
-        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)"
-
-  - task: AzureCLI@1
     displayName: 'Import docker image'
-    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'docker'))
+    condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'inlineScript'
@@ -146,47 +136,3 @@ jobs:
       scriptPath: tag-new-image.sh
       arguments: |
         "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)" "$(acrDigest)" 
-
-- job: NotifyFailure
-  pool:
-    name: hmcts-cftptl-agent-pool
-  dependsOn: ImportBaseImages
-  condition: failed() # this job will only run if import fails
-  steps:
-  - task: AzureKeyVault@1
-    displayName: 'Get secrets from Keyvault'
-    inputs:
-      azureSubscription: $(serviceConnection)
-      keyVaultName: $(keyvaultName)
-      secretsFilter: 'registry-slack-webhook'
-  
-  - task: AzureCLI@1
-    displayName: 'Notify error'
-    inputs:
-      azureSubscription: $(serviceConnection)
-      scriptLocation: 'scriptPath'
-      scriptPath: slack-notify.sh
-      arguments: |
-        "Error running base images import task." "$(registry-slack-webhook)" "liam_is_watching"
-
-- job: NotifySuccess
-  pool:
-    name: hmcts-cftptl-agent-pool
-  dependsOn: ImportBaseImages
-  condition: succeeded() # this job will only run if import succeeds
-  steps:
-  - task: AzureKeyVault@1
-    displayName: 'Get secrets from Keyvault'
-    inputs:
-      azureSubscription: $(serviceConnection)
-      keyVaultName: $(keyvaultName)
-      secretsFilter: 'registry-slack-webhook'
-  
-  - task: AzureCLI@1
-    displayName: 'Notify success'
-    inputs:
-      azureSubscription: $(serviceConnection)
-      scriptLocation: 'scriptPath'
-      scriptPath: slack-notify.sh
-      arguments: |
-        "Completed base images import task." "$(registry-slack-webhook)" "tim-webster"
