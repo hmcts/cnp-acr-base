@@ -27,7 +27,13 @@ jobs:
     name: hmcts-cftptl-agent-pool
   strategy:
     maxParallel: 2
-    matrix: 
+    matrix:
+      clamav-18-mailu:
+        baseImage: mailu/clamav
+        baseRegistry: docker.io
+        baseTag: 1.8
+        baseImageType: docker  # docker or gcr
+        targetImage: imported/mailu/clamav
       node-10-alpine:
         baseImage: library/node
         baseRegistry: docker.io
