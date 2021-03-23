@@ -83,29 +83,17 @@ jobs:
         baseImageType: gcr  # docker or gcr
         targetImage: imported/distroless/java
       openjdk-11-distroless:
-        baseImage: distroless/java
+        baseImage: distroless/java-debian10
         baseRegistry: gcr.io
         baseTag: 11
         baseImageType: gcr  # docker or gcr
         targetImage: imported/distroless/java
       openjdk-11-debug-distroless:
-        baseImage: distroless/java
+        baseImage: distroless/java-debian10
         baseRegistry: gcr.io
         baseTag: 11-debug
         baseImageType: gcr  # docker or gcr
         targetImage: imported/distroless/java
-      openjdk-11-debian10-distroless:
-        baseImage: distroless/java-debian10
-        baseRegistry: gcr.io
-        baseTag: 11
-        baseImageType: gcr  # docker or gcr
-        targetImage: imported/distroless/java-debian10
-      openjdk-11-debug-debian10-distroless:
-        baseImage: distroless/java-debian10
-        baseRegistry: gcr.io
-        baseTag: 11-debug
-        baseImageType: gcr  # docker or gcr
-        targetImage: imported/distroless/java-debian10
   steps:
   - task: AzureKeyVault@1
     displayName: 'Get secrets from Keyvault'
