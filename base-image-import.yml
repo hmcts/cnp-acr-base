@@ -24,16 +24,22 @@ variables:
 jobs:
 - job: ImportBaseImages
   pool:
-    name: hmcts-agent-pool
+    name: hmcts-cftptl-agent-pool
   strategy:
     maxParallel: 2
-    matrix: 
-      node-8-alpine:
-        baseImage: library/node
+    matrix:
+      clamav-18-mailu:
+        baseImage: mailu/clamav
         baseRegistry: docker.io
-        baseTag: 8-alpine
+        baseTag: 1.8
         baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
+        targetImage: imported/mailu/clamav
+      clamav-mock-100-citizensadvice:
+        baseImage: citizensadvice/clamav-mock
+        baseRegistry: docker.io
+        baseTag: 1.0.0
+        baseImageType: docker  # docker or gcr
+        targetImage: imported/citizensadvice/clamav-mock
       node-10-alpine:
         baseImage: library/node
         baseRegistry: docker.io
@@ -46,22 +52,22 @@ jobs:
         baseTag: 12-alpine
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
-      node-8-stretch-slim:
+      node-12-buster-slim:
         baseImage: library/node
         baseRegistry: docker.io
-        baseTag: 8-stretch-slim
+        baseTag: 12-buster-slim
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
-      node-10-stretch-slim:
+      node-14-alpine:
         baseImage: library/node
         baseRegistry: docker.io
-        baseTag: 10-stretch-slim
+        baseTag: 14-alpine
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
-      node-12-stretch-slim:
+      node-14-buster-slim:
         baseImage: library/node
         baseRegistry: docker.io
-        baseTag: 12-stretch-slim
+        baseTag: 14-buster-slim
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
       openjdk-8-distroless:
@@ -125,18 +131,8 @@ jobs:
         "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(baseImageType)" "$(acrName)"
 
   - task: AzureCLI@1
-    displayName: 'Import gcr image' # acr import does not work with gcr (see: https://github.com/Azure/azure-cli/issues/9557)
-    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'gcr'))
-    inputs:
-      azureSubscription: $(serviceConnection)
-      scriptLocation: 'scriptPath'
-      scriptPath: import-gcr-image.sh
-      arguments: |
-        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)"
-
-  - task: AzureCLI@1
     displayName: 'Import docker image'
-    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['baseImageType'], 'docker'))
+    condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'inlineScript'
@@ -164,47 +160,3 @@ jobs:
       scriptPath: tag-new-image.sh
       arguments: |
         "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)" "$(acrDigest)" 
-
-- job: NotifyFailure
-  pool:
-    name: hmcts-agent-pool
-  dependsOn: ImportBaseImages
-  condition: failed() # this job will only run if import fails
-  steps:
-  - task: AzureKeyVault@1
-    displayName: 'Get secrets from Keyvault'
-    inputs:
-      azureSubscription: $(serviceConnection)
-      keyVaultName: $(keyvaultName)
-      secretsFilter: 'registry-slack-webhook'
-  
-  - task: AzureCLI@1
-    displayName: 'Notify error'
-    inputs:
-      azureSubscription: $(serviceConnection)
-      scriptLocation: 'scriptPath'
-      scriptPath: slack-notify.sh
-      arguments: |
-        "Error running base images import task." "$(registry-slack-webhook)" "liam_is_watching"
-
-- job: NotifySuccess
-  pool:
-    name: hmcts-agent-pool
-  dependsOn: ImportBaseImages
-  condition: succeeded() # this job will only run if import succeeds
-  steps:
-  - task: AzureKeyVault@1
-    displayName: 'Get secrets from Keyvault'
-    inputs:
-      azureSubscription: $(serviceConnection)
-      keyVaultName: $(keyvaultName)
-      secretsFilter: 'registry-slack-webhook'
-  
-  - task: AzureCLI@1
-    displayName: 'Notify success'
-    inputs:
-      azureSubscription: $(serviceConnection)
-      scriptLocation: 'scriptPath'
-      scriptPath: slack-notify.sh
-      arguments: |
-        "Completed base images import task." "$(registry-slack-webhook)" "tim-webster"
