@@ -40,12 +40,6 @@ jobs:
         baseTag: 1.0.0
         baseImageType: docker  # docker or gcr
         targetImage: imported/citizensadvice/clamav-mock
-      node-10-alpine:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 10-alpine
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
       node-12-alpine:
         baseImage: library/node
         baseRegistry: docker.io
