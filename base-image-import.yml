@@ -77,13 +77,13 @@ jobs:
         baseImageType: gcr  # docker or gcr
         targetImage: imported/distroless/java
       openjdk-11-distroless:
-        baseImage: distroless/java-debian10
+        baseImage: distroless/java-debian11
         baseRegistry: gcr.io
         baseTag: 11
         baseImageType: gcr  # docker or gcr
         targetImage: imported/distroless/java
       openjdk-11-debug-distroless:
-        baseImage: distroless/java-debian10
+        baseImage: distroless/java-debian11
         baseRegistry: gcr.io
         baseTag: 11-debug
         baseImageType: gcr  # docker or gcr
