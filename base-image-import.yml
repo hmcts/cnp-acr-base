@@ -119,6 +119,7 @@ jobs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'inlineScript'
       inlineScript: |
+        set -x
         echo "Importing $(baseRegistry)/$(baseImage):$(baseTag) ..."
         az acr import --force --name $(acrName) --source $(baseRegistry)/$(baseImage):$(baseTag) --image $(targetImage):$(baseTag)-$(baseDigest) 
 
