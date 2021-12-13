@@ -28,12 +28,6 @@ jobs:
   strategy:
     maxParallel: 5
     matrix:
-      logstash:
-        baseImage: logstash/logstash-oss
-        baseRegistry: docker.elastic.co
-        baseTag: 7.16.1
-        baseImageType: docker  # docker or gcr
-        targetImage: logstash
       clamav-18-mailu:
         baseImage: mailu/clamav
         baseRegistry: docker.io
