@@ -17,6 +17,9 @@ then
   _digest=$(curl -i --silent --header "Accept: application/vnd.docker.distribution.manifest.v2+json" --header "Authorization: Bearer $_token" \
     "https://registry-1.docker.io/v2/${baseImage}/manifests/${baseTag}" |grep -i '[Dd]ocker-[Cc]ontent-[Dd]igest:' \
     |sed 's/[Dd]ocker-[Cc]ontent-[Dd]igest: *\(sha256:[a-zA-Z0-9]*\)/\1/' |tr -d '\r\n')
+elif [ ${baseImageType} == "elastic" ]
+then
+  _digest="abcd"
 else
   # google registry (gcr)
   _digest=$(curl -i --silent "https://gcr.io/v2/${baseImage}/manifests/${baseTag}" |grep -i '[Dd]ocker-[Cc]ontent-[Dd]igest:' \
