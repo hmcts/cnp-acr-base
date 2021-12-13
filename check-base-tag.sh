@@ -19,7 +19,7 @@ then
     |sed 's/[Dd]ocker-[Cc]ontent-[Dd]igest: *\(sha256:[a-zA-Z0-9]*\)/\1/' |tr -d '\r\n')
 elif [ ${baseImageType} == "elastic" ]
 then
-  _digest="abcd"
+  _digest="abcdefghijk"
 else
   # google registry (gcr)
   _digest=$(curl -i --silent "https://gcr.io/v2/${baseImage}/manifests/${baseTag}" |grep -i '[Dd]ocker-[Cc]ontent-[Dd]igest:' \

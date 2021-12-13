@@ -33,7 +33,7 @@ jobs:
         baseRegistry: docker.elastic.co
         baseTag: 7.16.1
         baseImageType: elastic  # elastic, docker or gcr
-        targetImage: logstash
+        targetImage: imported/logstash
       clamav-18-mailu:
         baseImage: mailu/clamav
         baseRegistry: docker.io
