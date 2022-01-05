@@ -64,6 +64,12 @@ jobs:
         baseTag: 14-buster-slim
         baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
+      node-16-alpine:
+        baseImage: library/node
+        baseRegistry: docker.io
+        baseTag: 16-alpine
+        baseImageType: docker  # docker or gcr
+        targetImage: imported/library/node
       node-16-buster-slim:
         baseImage: library/node
         baseRegistry: docker.io
