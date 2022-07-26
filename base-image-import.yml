@@ -100,6 +100,13 @@ jobs:
         baseTag: debug
         baseImageType: gcr  # docker or gcr
         targetImage: imported/distroless/java17
+      ruby2.7.6-slim-buster:
+        baseImage: library/ruby
+        baseRegistry: docker.io
+        baseTag: 2.7.6-slim-buster
+        baseImageType: docker  # docker or gcr
+        targetImage: imported/library/ruby-2.7.6
+        
   steps:
   - task: AzureKeyVault@1
     displayName: 'Get secrets from Keyvault'
