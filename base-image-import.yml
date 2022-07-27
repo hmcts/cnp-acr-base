@@ -105,7 +105,7 @@ jobs:
         baseRegistry: docker.io
         baseTag: 2.7.6-slim-buster
         baseImageType: docker  # docker or gcr
-        targetImage: imported/library/ruby-2.7.6
+        targetImage: imported/library/ruby
         
   steps:
   - task: AzureKeyVault@1
