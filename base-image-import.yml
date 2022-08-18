@@ -19,7 +19,7 @@ variables:
   serviceConnection: 'azurerm-prod'
   keyvaultNameStg: 'cftapps-stg'
   serviceConnectionStg: 'DCD-CFTAPPS-STG'
-  neuvectorController: 'https://neuvector01-api.aat.platform.hmcts.net/api'
+  neuvectorController: 'https://neuvector01-api.service.core-compute-aat.internal/api'
 
 jobs:
 - job: ImportBaseImages
