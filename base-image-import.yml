@@ -153,16 +153,14 @@ jobs:
         echo "Importing $(baseRegistry)/$(baseImage):$(baseTag) ..."
         az acr import --force --name $(acrName) --source $(baseRegistry)/$(baseImage):$(baseTag) --image $(targetImage):$(baseTag)-$(baseDigest) 
 
-  - task: AzureCLI@1
+  - task: AzureCLI@2
     displayName: 'Security scan new image'
     condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'
       scriptPath: base-image-scan.sh
-      arguments: |
-        "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)"
-        "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-new-admin-password)"
+      arguments: "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)" "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-new-admin-password)"
 
   - task: AzureCLI@1
     displayName: 'Re-tag new image using the base tag'
