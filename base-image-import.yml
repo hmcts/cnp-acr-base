@@ -160,7 +160,8 @@ jobs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'
       scriptPath: base-image-scan.sh
-      arguments: "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)" "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-new-admin-password)"
+      arguments: |
+        "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)" "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-new-admin-password)"
 
   - task: AzureCLI@1
     displayName: 'Re-tag new image using the base tag'
