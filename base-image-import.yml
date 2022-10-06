@@ -159,6 +159,7 @@ jobs:
     inputs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'
+      scriptType: bash
       scriptPath: base-image-scan.sh
       arguments: |
         "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)" "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-new-admin-password)"
