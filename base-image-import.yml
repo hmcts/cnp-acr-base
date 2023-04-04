@@ -32,67 +32,56 @@ jobs:
         baseImage: mailu/clamav
         baseRegistry: docker.io
         baseTag: 1.8
-        baseImageType: docker  # docker or gcr
         targetImage: imported/mailu/clamav
       clamav-mock-100-citizensadvice:
         baseImage: citizensadvice/clamav-mock
         baseRegistry: docker.io
         baseTag: 1.0.0
-        baseImageType: docker  # docker or gcr
         targetImage: imported/citizensadvice/clamav-mock
       node-16-alpine:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 16-alpine
-        baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
       node-16-buster-slim:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 16-buster-slim
-        baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
       node-18-alpine:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 18-alpine
-        baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
       node-18-buster-slim:
         baseImage: library/node
         baseRegistry: docker.io
         baseTag: 18-buster-slim
-        baseImageType: docker  # docker or gcr
         targetImage: imported/library/node
       openjdk-11-distroless:
         baseImage: distroless/java11-debian11
         baseRegistry: gcr.io
         baseTag: latest
-        baseImageType: gcr  # docker or gcr
         targetImage: imported/distroless/java11
       openjdk-11-debug-distroless:
         baseImage: distroless/java11-debian11
         baseRegistry: gcr.io
         baseTag: debug
-        baseImageType: gcr  # docker or gcr
         targetImage: imported/distroless/java11
       openjdk-17-distroless:
         baseImage: distroless/java17-debian11
         baseRegistry: gcr.io
         baseTag: latest
-        baseImageType: gcr  # docker or gcr
         targetImage: imported/distroless/java17
       openjdk-17-debug-distroless:
         baseImage: distroless/java17-debian11
         baseRegistry: gcr.io
         baseTag: debug
-        baseImageType: gcr  # docker or gcr
         targetImage: imported/distroless/java17
       ruby2.7.6-slim-buster:
         baseImage: library/ruby
         baseRegistry: docker.io
         baseTag: 2.7.6-slim-buster
-        baseImageType: docker  # docker or gcr
         targetImage: imported/library/ruby
         
   steps:
@@ -117,11 +106,11 @@ jobs:
       scriptLocation: 'scriptPath'
       scriptPath: check-base-tag.sh
       arguments: |
-        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(baseImageType)" "$(acrName)"
+        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(acrName)"
 
   - task: AzureCLI@1
     displayName: 'Import docker image'
-    #condition: eq(variables['newTagFound'], 'true')
+    condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'inlineScript'
@@ -145,7 +134,7 @@ jobs:
   - task: AzureCLI@1
     displayName: 'Re-tag new image using the base tag'
 #    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['scanPassed'], 'true'))
-#    condition: eq(variables['newTagFound'], 'true')
+    condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'
