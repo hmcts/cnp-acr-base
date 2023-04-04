@@ -134,14 +134,14 @@ jobs:
       keyVaultName: $(keyvaultNameStg)
       secretsFilter: 'neuvector-admin-username,neuvector-new-admin-password'
   
-#   - task: AzureCLI@1
-#     displayName: 'Check base registry if new digest available for tag'
-#     inputs:
-#       azureSubscription: $(serviceConnection)
-#       scriptLocation: 'scriptPath'
-#       scriptPath: check-base-tag.sh
-#       arguments: |
-#         "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(baseImageType)" "$(acrName)"
+  - task: AzureCLI@1
+    displayName: 'Check base registry if new digest available for tag'
+    inputs:
+      azureSubscription: $(serviceConnection)
+      scriptLocation: 'scriptPath'
+      scriptPath: check-base-tag.sh
+      arguments: |
+        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(baseImageType)" "$(acrName)"
 
   - task: AzureCLI@1
     displayName: 'Import docker image'
