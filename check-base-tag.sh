@@ -9,7 +9,14 @@ targetImage=$4
 baseImageType=$5
 acrName=$6
 
-_digest=$(docker buildx imagetools inspect --raw $baseRegistry/$baseImage:$baseTag | jq -r '.manifests[] | select (.platform.architecture == "amd64") | .digest')
+_result=$(docker buildx imagetools inspect --raw $baseRegistry/$baseImage:$baseTag)
+
+if echo $_result | grep -q manifests
+then
+  _digest=$(echo $_result | jq -r '.manifests[] | select (.platform.architecture == "amd64") | .digest')
+else
+  _digest=$(echo $_result | jq -r .config.digest)
+fi
 
 [ "$_digest" == "" ] && echo "Error: cannot get image digest for ${baseImage}:${baseTag}" && exit 1
 
