@@ -40,30 +40,6 @@ jobs:
         baseTag: 1.0.0
         baseImageType: docker  # docker or gcr
         targetImage: imported/citizensadvice/clamav-mock
-      node-12-alpine:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 12-alpine
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
-      node-12-buster-slim:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 12-buster-slim
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
-      node-14-alpine:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 14-alpine
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
-      node-14-buster-slim:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 14-buster-slim
-        baseImageType: docker  # docker or gcr
-        targetImage: imported/library/node
       node-16-alpine:
         baseImage: library/node
         baseRegistry: docker.io
