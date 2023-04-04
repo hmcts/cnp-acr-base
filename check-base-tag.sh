@@ -6,8 +6,7 @@ baseImage=$1
 baseRegistry=$2
 baseTag=$3
 targetImage=$4
-baseImageType=$5
-acrName=$6
+acrName=$5
 
 _result=$(docker buildx imagetools inspect --raw $baseRegistry/$baseImage:$baseTag)
 
