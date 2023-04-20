@@ -3,7 +3,7 @@
 ##
 name: ACR base image import 
 trigger:
-  - master
+  - enable-security-scan
 pr: none
 schedules:
 - cron: '0 1 * * *'
@@ -19,7 +19,7 @@ variables:
   serviceConnection: 'azurerm-prod'
   keyvaultNameStg: 'cftapps-stg'
   serviceConnectionStg: 'DCD-CFTAPPS-STG'
-  neuvectorController: 'https://neuvector01-api.aat.platform.hmcts.net'
+  neuvectorController: 'https://cft-neuvector01-api.aat.platform.hmcts.net'
 
 jobs:
 - job: ImportBaseImages
@@ -28,61 +28,63 @@ jobs:
   strategy:
     maxParallel: 5
     matrix:
-      clamav-18-mailu:
-        baseImage: mailu/clamav
-        baseRegistry: docker.io
-        baseTag: 1.8
-        targetImage: imported/mailu/clamav
+      # clamav-18-mailu:
+      #   baseImage: mailu/clamav
+      #   baseRegistry: docker.io
+      #   baseTag: 1.8
+      #   baseImageType: docker
+      #   targetImage: imported/mailu/clamav
       clamav-mock-100-citizensadvice:
         baseImage: citizensadvice/clamav-mock
         baseRegistry: docker.io
         baseTag: 1.0.0
+        baseImageType: docker
         targetImage: imported/citizensadvice/clamav-mock
-      node-16-alpine:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 16-alpine
-        targetImage: imported/library/node
-      node-16-buster-slim:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 16-buster-slim
-        targetImage: imported/library/node
-      node-18-alpine:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 18-alpine
-        targetImage: imported/library/node
-      node-18-buster-slim:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 18-buster-slim
-        targetImage: imported/library/node
-      openjdk-11-distroless:
-        baseImage: distroless/java11-debian11
-        baseRegistry: gcr.io
-        baseTag: latest
-        targetImage: imported/distroless/java11
-      openjdk-11-debug-distroless:
-        baseImage: distroless/java11-debian11
-        baseRegistry: gcr.io
-        baseTag: debug
-        targetImage: imported/distroless/java11
-      openjdk-17-distroless:
-        baseImage: distroless/java17-debian11
-        baseRegistry: gcr.io
-        baseTag: latest
-        targetImage: imported/distroless/java17
-      openjdk-17-debug-distroless:
-        baseImage: distroless/java17-debian11
-        baseRegistry: gcr.io
-        baseTag: debug
-        targetImage: imported/distroless/java17
-      ruby2.7.6-slim-buster:
-        baseImage: library/ruby
-        baseRegistry: docker.io
-        baseTag: 2.7.6-slim-buster
-        targetImage: imported/library/ruby
+      # node-16-alpine:
+      #   baseImage: library/node
+      #   baseRegistry: docker.io
+      #   baseTag: 16-alpine
+      #   targetImage: imported/library/node
+      # node-16-buster-slim:
+      #   baseImage: library/node
+      #   baseRegistry: docker.io
+      #   baseTag: 16-buster-slim
+      #   targetImage: imported/library/node
+      # node-18-alpine:
+      #   baseImage: library/node
+      #   baseRegistry: docker.io
+      #   baseTag: 18-alpine
+      #   targetImage: imported/library/node
+      # node-18-buster-slim:
+      #   baseImage: library/node
+      #   baseRegistry: docker.io
+      #   baseTag: 18-buster-slim
+      #   targetImage: imported/library/node
+      # openjdk-11-distroless:
+      #   baseImage: distroless/java11-debian11
+      #   baseRegistry: gcr.io
+      #   baseTag: latest
+      #   targetImage: imported/distroless/java11
+      # openjdk-11-debug-distroless:
+      #   baseImage: distroless/java11-debian11
+      #   baseRegistry: gcr.io
+      #   baseTag: debug
+      #   targetImage: imported/distroless/java11
+      # openjdk-17-distroless:
+      #   baseImage: distroless/java17-debian11
+      #   baseRegistry: gcr.io
+      #   baseTag: latest
+      #   targetImage: imported/distroless/java17
+      # openjdk-17-debug-distroless:
+      #   baseImage: distroless/java17-debian11
+      #   baseRegistry: gcr.io
+      #   baseTag: debug
+      #   targetImage: imported/distroless/java17
+      # ruby2.7.6-slim-buster:
+      #   baseImage: library/ruby
+      #   baseRegistry: docker.io
+      #   baseTag: 2.7.6-slim-buster
+      #   targetImage: imported/library/ruby
         
   steps:
   - task: AzureKeyVault@1
@@ -106,7 +108,7 @@ jobs:
       scriptLocation: 'scriptPath'
       scriptPath: check-base-tag.sh
       arguments: |
-        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(acrName)"
+        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(baseImageType)" "$(acrName)"
 
   - task: AzureCLI@1
     displayName: 'Import docker image'
@@ -120,21 +122,21 @@ jobs:
 
 # Temporarily disable scan
 # https://tools.hmcts.net/jira/browse/DTSPO-10310
-#   - task: AzureCLI@1
-#     displayName: 'Security scan new image'
-#     condition: eq(variables['newTagFound'], 'true')
-#     inputs:
-#       azureSubscription: $(serviceConnection)
-#       scriptLocation: 'scriptPath'
-#       scriptPath: base-image-scan.sh
-#       arguments: |
-#         "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)" 
-#         "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-new-admin-password)"
+  - task: AzureCLI@1
+    displayName: 'Security scan new image'
+    # condition: eq(variables['newTagFound'], 'true')
+    inputs:
+      azureSubscription: $(serviceConnection)
+      scriptLocation: 'scriptPath'
+      scriptPath: base-image-scan.sh
+      arguments: |
+        "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)" 
+        "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-new-admin-password)"
 
   - task: AzureCLI@1
     displayName: 'Re-tag new image using the base tag'
-#    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['scanPassed'], 'true'))
-    condition: eq(variables['newTagFound'], 'true')
+    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['scanPassed'], 'true'))
+    # condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'

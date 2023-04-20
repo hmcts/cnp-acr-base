@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -e
 
@@ -6,15 +6,20 @@ baseImage=$1
 baseRegistry=$2
 baseTag=$3
 targetImage=$4
-acrName=$5
+baseImageType=$5
+acrName=$6
 
-_result=$(docker buildx imagetools inspect --raw $baseRegistry/$baseImage:$baseTag)
-
-if echo $_result | grep -q manifests
+if [ ${baseImageType} == "docker" ]
 then
-  _digest=$(echo $_result | jq -r '.manifests[] | select (.platform.architecture == "amd64") | .digest')
+ # docker registry
+  _token=$(curl --silent "https://auth.docker.io/token?scope=repository:${baseImage}:pull&service=registry.docker.io" | jq -r '.token')
+  _digest=$(curl -i --silent --header "Accept: application/vnd.docker.distribution.manifest.v2+json" --header "Authorization: Bearer $_token" \
+    "https://registry-1.docker.io/v2/${baseImage}/manifests/${baseTag}" |grep -i '[Dd]ocker-[Cc]ontent-[Dd]igest:' \
+    |sed 's/[Dd]ocker-[Cc]ontent-[Dd]igest: *\(sha256:[a-zA-Z0-9]*\)/\1/' |tr -d '\r\n')
 else
-  _digest=$(echo $_result | jq -r .config.digest)
+   # google registry (gcr)
+  _digest=$(curl -i --silent "https://gcr.io/v2/${baseImage}/manifests/${baseTag}" |grep -i '[Dd]ocker-[Cc]ontent-[Dd]igest:' \
+    |sed 's/[Dd]ocker-[Cc]ontent-[Dd]igest: *\(sha256:[a-zA-Z0-9]*\)/\1/' |tr -d '\r\n')
 fi
 
 [ "$_digest" == "" ] && echo "Error: cannot get image digest for ${baseImage}:${baseTag}" && exit 1
@@ -22,8 +27,8 @@ fi
 # Get current digest from target azure registry
 echo "Base registry current digest for ${baseImage}:${baseTag}: [${_digest}]"
 
-_acr_digest=$(az acr manifest list-metadata --registry $acrName --name $targetImage \
- --query "[?not_null(tags[])]|[?contains(tags, \`\"${baseTag}\"\`)].digest|[0]" -o tsv)
+_acr_digest=$(az acr repository show-manifests -n ${acrName} --repository ${targetImage} \
+  --query "[?not_null(tags[])]|[?contains(tags, \`\"${baseTag}\"\`)].digest|[0]" |tr -d '"[:blank:]' |xargs echo -n)
 
 echo "Target registry current digest for ${baseImage}:${baseTag}: [${_acr_digest}]"
 
