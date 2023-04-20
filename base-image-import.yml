@@ -3,7 +3,7 @@
 ##
 name: ACR base image import 
 trigger:
-  - master
+  - enable-security-scan
 pr: none
 schedules:
 - cron: '0 1 * * *'
