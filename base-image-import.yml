@@ -124,7 +124,7 @@ jobs:
 # https://tools.hmcts.net/jira/browse/DTSPO-10310
   - task: AzureCLI@1
     displayName: 'Security scan new image'
-    condition: eq(variables['newTagFound'], 'true')
+    # condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'
