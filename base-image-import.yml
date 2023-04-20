@@ -32,57 +32,58 @@ jobs:
         baseImage: mailu/clamav
         baseRegistry: docker.io
         baseTag: 1.8
+        baseImageType: docker
         targetImage: imported/mailu/clamav
-      clamav-mock-100-citizensadvice:
-        baseImage: citizensadvice/clamav-mock
-        baseRegistry: docker.io
-        baseTag: 1.0.0
-        targetImage: imported/citizensadvice/clamav-mock
-      node-16-alpine:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 16-alpine
-        targetImage: imported/library/node
-      node-16-buster-slim:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 16-buster-slim
-        targetImage: imported/library/node
-      node-18-alpine:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 18-alpine
-        targetImage: imported/library/node
-      node-18-buster-slim:
-        baseImage: library/node
-        baseRegistry: docker.io
-        baseTag: 18-buster-slim
-        targetImage: imported/library/node
-      openjdk-11-distroless:
-        baseImage: distroless/java11-debian11
-        baseRegistry: gcr.io
-        baseTag: latest
-        targetImage: imported/distroless/java11
-      openjdk-11-debug-distroless:
-        baseImage: distroless/java11-debian11
-        baseRegistry: gcr.io
-        baseTag: debug
-        targetImage: imported/distroless/java11
-      openjdk-17-distroless:
-        baseImage: distroless/java17-debian11
-        baseRegistry: gcr.io
-        baseTag: latest
-        targetImage: imported/distroless/java17
-      openjdk-17-debug-distroless:
-        baseImage: distroless/java17-debian11
-        baseRegistry: gcr.io
-        baseTag: debug
-        targetImage: imported/distroless/java17
-      ruby2.7.6-slim-buster:
-        baseImage: library/ruby
-        baseRegistry: docker.io
-        baseTag: 2.7.6-slim-buster
-        targetImage: imported/library/ruby
+      # clamav-mock-100-citizensadvice:
+      #   baseImage: citizensadvice/clamav-mock
+      #   baseRegistry: docker.io
+      #   baseTag: 1.0.0
+      #   targetImage: imported/citizensadvice/clamav-mock
+      # node-16-alpine:
+      #   baseImage: library/node
+      #   baseRegistry: docker.io
+      #   baseTag: 16-alpine
+      #   targetImage: imported/library/node
+      # node-16-buster-slim:
+      #   baseImage: library/node
+      #   baseRegistry: docker.io
+      #   baseTag: 16-buster-slim
+      #   targetImage: imported/library/node
+      # node-18-alpine:
+      #   baseImage: library/node
+      #   baseRegistry: docker.io
+      #   baseTag: 18-alpine
+      #   targetImage: imported/library/node
+      # node-18-buster-slim:
+      #   baseImage: library/node
+      #   baseRegistry: docker.io
+      #   baseTag: 18-buster-slim
+      #   targetImage: imported/library/node
+      # openjdk-11-distroless:
+      #   baseImage: distroless/java11-debian11
+      #   baseRegistry: gcr.io
+      #   baseTag: latest
+      #   targetImage: imported/distroless/java11
+      # openjdk-11-debug-distroless:
+      #   baseImage: distroless/java11-debian11
+      #   baseRegistry: gcr.io
+      #   baseTag: debug
+      #   targetImage: imported/distroless/java11
+      # openjdk-17-distroless:
+      #   baseImage: distroless/java17-debian11
+      #   baseRegistry: gcr.io
+      #   baseTag: latest
+      #   targetImage: imported/distroless/java17
+      # openjdk-17-debug-distroless:
+      #   baseImage: distroless/java17-debian11
+      #   baseRegistry: gcr.io
+      #   baseTag: debug
+      #   targetImage: imported/distroless/java17
+      # ruby2.7.6-slim-buster:
+      #   baseImage: library/ruby
+      #   baseRegistry: docker.io
+      #   baseTag: 2.7.6-slim-buster
+      #   targetImage: imported/library/ruby
         
   steps:
   - task: AzureKeyVault@1
@@ -106,7 +107,7 @@ jobs:
       scriptLocation: 'scriptPath'
       scriptPath: check-base-tag.sh
       arguments: |
-        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(acrName)"
+        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(baseImageType)" "$(acrName)"
 
   - task: AzureCLI@1
     displayName: 'Import docker image'
