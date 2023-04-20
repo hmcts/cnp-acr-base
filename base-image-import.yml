@@ -120,21 +120,21 @@ jobs:
 
 # Temporarily disable scan
 # https://tools.hmcts.net/jira/browse/DTSPO-10310
-#   - task: AzureCLI@1
-#     displayName: 'Security scan new image'
-#     condition: eq(variables['newTagFound'], 'true')
-#     inputs:
-#       azureSubscription: $(serviceConnection)
-#       scriptLocation: 'scriptPath'
-#       scriptPath: base-image-scan.sh
-#       arguments: |
-#         "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)" 
-#         "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-new-admin-password)"
+  - task: AzureCLI@1
+    displayName: 'Security scan new image'
+    condition: eq(variables['newTagFound'], 'true')
+    inputs:
+      azureSubscription: $(serviceConnection)
+      scriptLocation: 'scriptPath'
+      scriptPath: base-image-scan.sh
+      arguments: |
+        "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)" 
+        "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-new-admin-password)"
 
   - task: AzureCLI@1
     displayName: 'Re-tag new image using the base tag'
-#    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['scanPassed'], 'true'))
-    condition: eq(variables['newTagFound'], 'true')
+    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['scanPassed'], 'true'))
+    # condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'
