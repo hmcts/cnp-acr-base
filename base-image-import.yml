@@ -28,17 +28,18 @@ jobs:
   strategy:
     maxParallel: 5
     matrix:
-      clamav-18-mailu:
-        baseImage: mailu/clamav
-        baseRegistry: docker.io
-        baseTag: 1.8
-        baseImageType: docker
-        targetImage: imported/mailu/clamav
-      # clamav-mock-100-citizensadvice:
-      #   baseImage: citizensadvice/clamav-mock
+      # clamav-18-mailu:
+      #   baseImage: mailu/clamav
       #   baseRegistry: docker.io
-      #   baseTag: 1.0.0
-      #   targetImage: imported/citizensadvice/clamav-mock
+      #   baseTag: 1.8
+      #   baseImageType: docker
+      #   targetImage: imported/mailu/clamav
+      clamav-mock-100-citizensadvice:
+        baseImage: citizensadvice/clamav-mock
+        baseRegistry: docker.io
+        baseTag: 1.0.0
+        baseImageType: docker
+        targetImage: imported/citizensadvice/clamav-mock
       # node-16-alpine:
       #   baseImage: library/node
       #   baseRegistry: docker.io
