@@ -89,7 +89,7 @@ jobs:
         baseTag: 3.2.2-slim-buster
         targetImage: imported/library/ruby
 
-steps:
+  steps:
   - task: AzureKeyVault@1
     displayName: 'Get secrets from Keyvault'
     inputs:
