@@ -83,7 +83,12 @@ jobs:
         baseRegistry: docker.io
         baseTag: 2.7.6-slim-buster
         targetImage: imported/library/ruby
-        
+      ruby3.2.2-slim-buster:
+        baseImage: library/ruby
+        baseRegistry: docker.io
+        baseTag: 3.2.2-slim-buster
+        targetImage: imported/library/ruby
+
   steps:
   - task: AzureKeyVault@1
     displayName: 'Get secrets from Keyvault'
