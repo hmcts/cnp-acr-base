@@ -17,6 +17,8 @@ echo $repoName
 echo $destinationRepo
 echo $tagVersion
 
+systemctl start docker
+
 echo "Logging into ACR..."
 az acr login --name hmctspublic --subscription 8999dec3-0104-4a27-94ee-6588559729d1
 
