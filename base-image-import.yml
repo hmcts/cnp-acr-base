@@ -3,11 +3,8 @@
 ##
 name: ACR base image import 
 trigger:
-  branches: 
-    include:
-      - master
-  # - master
-pr: DTSPO-14562
+  - master
+pr: none
 schedules:
 - cron: '0 1 * * *'
   displayName: Daily build
