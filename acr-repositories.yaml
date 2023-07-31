@@ -1,0 +1,11 @@
+rules:
+  jenkins:
+    ruleName: Jenkins
+    repoName: hmcts/jenkins
+    destinationRepo: jenkins
+    tagVersion: "75c3e8818c"
+  ccd-definition-importer:
+    ruleName: ccd-definition-importer
+    repoName: hmcts/ccd-definition-importer
+    destinationRepo: ccd-definition-importer
+    tagVersion: latest
