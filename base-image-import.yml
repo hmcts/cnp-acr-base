@@ -4,7 +4,7 @@
 name: ACR base image import 
 trigger:
   # - master
-  - DTSPO-14562
+  - none
 pr: DTSPO-14562
 schedules:
 - cron: '0 1 * * *'
