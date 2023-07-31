@@ -142,7 +142,7 @@ jobs:
 #       arguments: |
 #         "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)" "$(acrDigest)" 
 
-- job: Create ACR Cache
+- job: CreateACRCache
   pool:
     name: hmcts-cftptl-agent-pool
   steps:
