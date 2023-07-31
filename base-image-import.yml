@@ -4,7 +4,8 @@
 name: ACR base image import 
 trigger:
   branches: 
-    - master
+    include:
+      - DTSPO-14562
   # - master
 pr: DTSPO-14562
 schedules:
