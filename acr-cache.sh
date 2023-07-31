@@ -20,7 +20,7 @@ echo $tagVersion
 # systemctl start docker
 
 echo "Logging into ACR..."
-az acr login --name hmctspublic --subscription 8999dec3-0104-4a27-94ee-6588559729d1
+az acr login --name hmctspublic --subscription 8999dec3-0104-4a27-94ee-6588559729d1 --expose-token
 
 az account set --subscription DCD-CNP-Prod
 az acr credential-set create -r hmctspublic.azurecr.io -n credentials -l docker.io -u https://cftptl-intsvc.vault.azure.net/secrets/docker-hub-username -p https://cftptl-intsvc.vault.azure.net/secrets/docker-hub-password
