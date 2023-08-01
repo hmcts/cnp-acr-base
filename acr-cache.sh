@@ -39,7 +39,7 @@ for key in $(echo $RULES_CONFIG | jq -r '.rules | keys | .[]'); do
     echo "Create ACR Cache"
     az acr cache create -r hmctspublic -n $RULE_NAME -s docker.io/$REPO_NAME -t $DESTINATION_NAME -c credentials1
 
-    az login --username ${dockerHubUsername} --password ${dockerHubPassword} --allow-no-subscriptions
+    az login --username ${dockerHubUsername} --password ${dockerHubPassword}
 
     echo "Docker Image Pull"
     docker pull hmctspublic.azurecr.io/$DESTINATION_NAME:$TAG_VERSION
