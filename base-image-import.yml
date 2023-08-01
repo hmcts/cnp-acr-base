@@ -144,7 +144,7 @@ jobs:
 
 - job: CreateACRCache
   pool:
-    vmImage: hmcts-cftptl-agent-pool
+    vmImage: ubuntu-latest
   steps:
     - task: AzureCLI@1
       displayName: 'Create ACR Cache'
