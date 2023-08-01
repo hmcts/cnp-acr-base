@@ -32,6 +32,9 @@ for key in $(echo $RULES_CONFIG | jq -r '.rules | keys | .[]'); do
     echo "Create KV Policy"
     az keyvault set-policy --name "cftptl-intsvc" --object-id $PRINCIPAL_ID --secret-permissions get
 
+    echo "Logging into ACR..."
+    az acr login --name hmctspublic --subscription 8999dec3-0104-4a27-94ee-6588559729d1 --expose-token
+
     echo "Docker Image Pull"
     docker pull hmctspublic.azurecr.io/$DESTINATION_NAME:$TAG_VERSION
 done
