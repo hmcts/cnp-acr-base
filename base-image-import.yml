@@ -146,9 +146,17 @@ jobs:
   pool:
     vmImage: ubuntu-latest
   steps:
+    - task: AzureKeyVault@1
+      displayName: 'Get secrets from Keyvault'
+      inputs:
+        azureSubscription: "DTS-CFTPTL-INTSVC"
+        keyVaultName: $(cftptl-intsvc)
+        secretsFilter: 'docker-hub-username,docker-hub-password'
     - task: AzureCLI@1
       displayName: 'Create ACR Cache'
       inputs:
         azureSubscription: $(serviceConnection)
         scriptLocation: 'scriptPath'
         scriptPath: acr-cache.sh
+        arguments: |
+          "$(docker-hub-username)" "$(docker-hub-password)"

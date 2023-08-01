@@ -2,6 +2,9 @@
 
 set -e
 
+dockerHubUsername=$1
+dockerHubPassword=$2
+
 echo "Logging into ACR..."
 az acr login --name hmctspublic --subscription 8999dec3-0104-4a27-94ee-6588559729d1 --expose-token
 
@@ -32,10 +35,12 @@ for key in $(echo $RULES_CONFIG | jq -r '.rules | keys | .[]'); do
     echo "destinationRepo is $DESTINATION_NAME"
     TAG_VERSION=$(echo $RULES_CONFIG | jq -r '.rules | ."'$key'" | .tagVersion')
     echo "tagVersion is $TAG_VERSION"
-    
+
     echo "Create ACR Cache"
     az acr cache create -r hmctspublic -n $RULE_NAME -s docker.io/$REPO_NAME -t $DESTINATION_NAME -c credentials1
 
+    az login --service-principal --username $(dockerHubUsername) --password $(dockerHubPassword)
+    
     echo "Docker Image Pull"
     docker pull hmctspublic.azurecr.io/$DESTINATION_NAME:$TAG_VERSION
 done
