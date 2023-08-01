@@ -150,7 +150,7 @@ jobs:
       displayName: 'Get secrets from Keyvault'
       inputs:
         azureSubscription: "DTS-CFTPTL-INTSVC"
-        keyVaultName: $(cftptl-intsvc)
+        keyVaultName: "cftptl-intsvc"
         secretsFilter: 'docker-hub-username,docker-hub-password'
     - task: AzureCLI@1
       displayName: 'Create ACR Cache'
