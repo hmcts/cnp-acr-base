@@ -25,15 +25,6 @@ for key in $(echo $RULES_CONFIG | jq -r '.rules | keys | .[]'); do
     az acr cache create -r hmctspublic -n $RULE_NAME -s docker.io/$REPO_NAME -t $DESTINATION_NAME -c credentials
 done
 
-
-# echo "Setup Subscription DCD-CNP-Prod"
-# az account set --subscription DCD-CNP-Prod
-
-
-
-# echo "Create ACR Cache"
-# az acr cache create -r hmctspublic -n $RULE_NAME -s docker.io/$REPO_NAME -t $DESTINATION_NAME -c credentials
-
 PRINCIPAL_ID=$(az acr credential-set show -n credentials  -r hmctspublic  --query 'identity.principalId'  -o tsv)
 
 echo "Setup Subscription DTS-CFTPTL-INTSVC"

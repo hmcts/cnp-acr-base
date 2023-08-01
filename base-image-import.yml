@@ -16,7 +16,7 @@ variables:
   acrName: hmctspublic
   targetRegistry: hmctspublic.azurecr.io
   keyvaultName: 'infra-vault-prod'
-  serviceConnection: 'azurerm-prod'
+  serviceConnection: 'DCD-CNP-PROD'
   keyvaultNameStg: 'cftapps-stg'
   serviceConnectionStg: 'DCD-CFTAPPS-STG'
   neuvectorController: 'https://neuvector01-api.aat.platform.hmcts.net'
