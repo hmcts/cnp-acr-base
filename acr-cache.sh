@@ -33,7 +33,7 @@ az account show
 # keyVault=$(az keyvault show --name "cftptl-intsvc" --resource-group "core-infra-intsvc-rg")
 
 echo "Create KV Policy"
-az keyvault set-policy --name $keyVault --object-id $PRINCIPAL_ID --secret-permissions get
+az keyvault set-policy --name "cftptl-intsvc" --object-id $PRINCIPAL_ID --secret-permissions get
 
 echo "Docker Image Pull"
 docker pull hmctspublic.azurecr.io/$DESTINATION_NAME:$TAG_VERSION
