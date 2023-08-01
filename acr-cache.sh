@@ -26,13 +26,11 @@
 # done
 
 PRINCIPAL_ID=$(az acr credential-set show -n credentials  -r hmctspublic  --query 'identity.principalId'  -o tsv)
-echo $PRINCIPAL_ID
 
 echo "Setup Subscription DTS-CFTPTL-INTSVC"
 az account set --subscription DTS-CFTPTL-INTSVC
 az account show
-keyVault=$(az keyvault show --name "cftptl-intsvc" --resource-group "core-infra-intsvc-rg")
-echo $keyVault
+# keyVault=$(az keyvault show --name "cftptl-intsvc" --resource-group "core-infra-intsvc-rg")
 
 echo "Create KV Policy"
 az keyvault set-policy --name $keyVault --object-id $PRINCIPAL_ID --secret-permissions get
