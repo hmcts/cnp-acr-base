@@ -20,8 +20,8 @@ done
 echo "Logging into ACR..."
 az acr login --name hmctspublic --subscription 8999dec3-0104-4a27-94ee-6588559729d1 --expose-token
 
-echo "Setup Subscription DCD-CNP-Prod"
-az account set --subscription DCD-CNP-Prod
+# echo "Setup Subscription DCD-CNP-Prod"
+# az account set --subscription DCD-CNP-Prod
 
 echo "Create ACR Credentials"
 az acr credential-set create -r hmctspublic.azurecr.io -n credentials -l docker.io -u https://cftptl-intsvc.vault.azure.net/secrets/docker-hub-username -p https://cftptl-intsvc.vault.azure.net/secrets/docker-hub-password
