@@ -3,7 +3,7 @@
 # set -e
 
 RULES_CONFIG=$(yq e acr-repositories.yaml -o=json)
-echo $RULES_CONFIG
+# echo $RULES_CONFIG
 
 for key in $(echo $RULES_CONFIG | jq -r '.rules | keys | .[]'); do
     echo "key is $key"
@@ -20,7 +20,7 @@ done
 echo "Logging into ACR..."
 az acr login --name hmctspublic --subscription 8999dec3-0104-4a27-94ee-6588559729d1 --expose-token
 
-echo "Setup Subscription"
+echo "Setup Subscription DCD-CNP-Prod"
 az account set --subscription DCD-CNP-Prod
 
 echo "Create ACR Credentials"
@@ -31,7 +31,7 @@ az acr cache create -r hmctspublic.azurecr.io -n $RULE_NAME -s docker.io/$REPO_N
 
 PRINCIPAL_ID=$(az acr credential-set show -n credentials  -r hmctspublic.azurecr.io  --query 'identity.principalId'  -o tsv)
 
-echo "Setup Subscription"
+echo "Setup Subscription DTS-CFTPTL-INTSVC"
 az account set --subscription DTS-CFTPTL-INTSVC
 
 echo "Create KV Policy"
