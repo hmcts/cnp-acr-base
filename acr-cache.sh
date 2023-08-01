@@ -29,11 +29,10 @@ PRINCIPAL_ID=$(az acr credential-set show -n credentials  -r hmctspublic  --quer
 
 echo "Setup Subscription DTS-CFTPTL-INTSVC"
 az account set --subscription DTS-CFTPTL-INTSVC
-az account show
 # keyVault=$(az keyvault show --name "cftptl-intsvc" --resource-group "core-infra-intsvc-rg")
 
 echo "Create KV Policy"
 az keyvault set-policy --name "cftptl-intsvc" --object-id $PRINCIPAL_ID --secret-permissions get
 
-echo "Docker Image Pull"
-docker pull hmctspublic.azurecr.io/$DESTINATION_NAME:$TAG_VERSION
+# echo "Docker Image Pull"
+# docker pull hmctspublic.azurecr.io/$DESTINATION_NAME:$TAG_VERSION
