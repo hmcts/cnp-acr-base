@@ -144,7 +144,7 @@ jobs:
 
 - job: CreateACRCache
   pool:
-    name: hmcts-cftptl-agent-pool
+    name: ubuntu-latest
   steps:
     - task: AzureCLI@1
       displayName: 'Create ACR Cache'
