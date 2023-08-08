@@ -22,125 +22,125 @@ variables:
   neuvectorController: 'https://neuvector01-api.aat.platform.hmcts.net'
 
 jobs:
-# - job: ImportBaseImages
-#   pool:
-#     name: hmcts-cftptl-agent-pool
-#   strategy:
-#     maxParallel: 5
-#     matrix:
-#       clamav-mock-100-citizensadvice:
-#         baseImage: citizensadvice/clamav-mock
-#         baseRegistry: docker.io
-#         baseTag: 1.0.0
-#         targetImage: imported/citizensadvice/clamav-mock
-#       node-16-alpine:
-#         baseImage: library/node
-#         baseRegistry: docker.io
-#         baseTag: 16-alpine
-#         targetImage: imported/library/node
-#       node-16-buster-slim:
-#         baseImage: library/node
-#         baseRegistry: docker.io
-#         baseTag: 16-buster-slim
-#         targetImage: imported/library/node
-#       node-18-alpine:
-#         baseImage: library/node
-#         baseRegistry: docker.io
-#         baseTag: 18-alpine
-#         targetImage: imported/library/node
-#       node-18-buster-slim:
-#         baseImage: library/node
-#         baseRegistry: docker.io
-#         baseTag: 18-buster-slim
-#         targetImage: imported/library/node
-#       openjdk-11-distroless:
-#         baseImage: distroless/java11-debian11
-#         baseRegistry: gcr.io
-#         baseTag: latest
-#         targetImage: imported/distroless/java11
-#       openjdk-11-debug-distroless:
-#         baseImage: distroless/java11-debian11
-#         baseRegistry: gcr.io
-#         baseTag: debug
-#         targetImage: imported/distroless/java11
-#       openjdk-17-distroless:
-#         baseImage: distroless/java17-debian11
-#         baseRegistry: gcr.io
-#         baseTag: latest
-#         targetImage: imported/distroless/java17
-#       openjdk-17-debug-distroless:
-#         baseImage: distroless/java17-debian11
-#         baseRegistry: gcr.io
-#         baseTag: debug
-#         targetImage: imported/distroless/java17
-#       ruby2.7.6-slim-buster:
-#         baseImage: library/ruby
-#         baseRegistry: docker.io
-#         baseTag: 2.7.6-slim-buster
-#         targetImage: imported/library/ruby
-#       ruby3.2.2-slim-buster:
-#         baseImage: library/ruby
-#         baseRegistry: docker.io
-#         baseTag: 3.2.2-slim-buster
-#         targetImage: imported/library/ruby
+- job: ImportBaseImages
+  pool:
+    name: hmcts-cftptl-agent-pool
+  strategy:
+    maxParallel: 5
+    matrix:
+      clamav-mock-100-citizensadvice:
+        baseImage: citizensadvice/clamav-mock
+        baseRegistry: docker.io
+        baseTag: 1.0.0
+        targetImage: imported/citizensadvice/clamav-mock
+      node-16-alpine:
+        baseImage: library/node
+        baseRegistry: docker.io
+        baseTag: 16-alpine
+        targetImage: imported/library/node
+      node-16-buster-slim:
+        baseImage: library/node
+        baseRegistry: docker.io
+        baseTag: 16-buster-slim
+        targetImage: imported/library/node
+      node-18-alpine:
+        baseImage: library/node
+        baseRegistry: docker.io
+        baseTag: 18-alpine
+        targetImage: imported/library/node
+      node-18-buster-slim:
+        baseImage: library/node
+        baseRegistry: docker.io
+        baseTag: 18-buster-slim
+        targetImage: imported/library/node
+      openjdk-11-distroless:
+        baseImage: distroless/java11-debian11
+        baseRegistry: gcr.io
+        baseTag: latest
+        targetImage: imported/distroless/java11
+      openjdk-11-debug-distroless:
+        baseImage: distroless/java11-debian11
+        baseRegistry: gcr.io
+        baseTag: debug
+        targetImage: imported/distroless/java11
+      openjdk-17-distroless:
+        baseImage: distroless/java17-debian11
+        baseRegistry: gcr.io
+        baseTag: latest
+        targetImage: imported/distroless/java17
+      openjdk-17-debug-distroless:
+        baseImage: distroless/java17-debian11
+        baseRegistry: gcr.io
+        baseTag: debug
+        targetImage: imported/distroless/java17
+      ruby2.7.6-slim-buster:
+        baseImage: library/ruby
+        baseRegistry: docker.io
+        baseTag: 2.7.6-slim-buster
+        targetImage: imported/library/ruby
+      ruby3.2.2-slim-buster:
+        baseImage: library/ruby
+        baseRegistry: docker.io
+        baseTag: 3.2.2-slim-buster
+        targetImage: imported/library/ruby
 
-  # steps:
-#   - task: AzureKeyVault@1
-#     displayName: 'Get secrets from Keyvault'
-#     inputs:
-#       azureSubscription: $(serviceConnection)
-#       keyVaultName: $(keyvaultName)
-#       secretsFilter: 'registry-public-username,registry-public-password,registry-slack-webhook'
+  steps:
+  - task: AzureKeyVault@1
+    displayName: 'Get secrets from Keyvault'
+    inputs:
+      azureSubscription: $(serviceConnection)
+      keyVaultName: $(keyvaultName)
+      secretsFilter: 'registry-public-username,registry-public-password,registry-slack-webhook'
   
-#   - task: AzureKeyVault@1
-#     displayName: 'Get secrets from Keyvault'
-#     inputs:
-#       azureSubscription: $(serviceConnectionStg)
-#       keyVaultName: $(keyvaultNameStg)
-#       secretsFilter: 'neuvector-admin-username,neuvector-new-admin-password'
+  - task: AzureKeyVault@1
+    displayName: 'Get secrets from Keyvault'
+    inputs:
+      azureSubscription: $(serviceConnectionStg)
+      keyVaultName: $(keyvaultNameStg)
+      secretsFilter: 'neuvector-admin-username,neuvector-new-admin-password'
   
-#   - task: AzureCLI@1
-#     displayName: 'Check base registry if new digest available for tag'
-#     inputs:
-#       azureSubscription: $(serviceConnection)
-#       scriptLocation: 'scriptPath'
-#       scriptPath: check-base-tag.sh
-#       arguments: |
-#         "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(acrName)"
+  - task: AzureCLI@1
+    displayName: 'Check base registry if new digest available for tag'
+    inputs:
+      azureSubscription: $(serviceConnection)
+      scriptLocation: 'scriptPath'
+      scriptPath: check-base-tag.sh
+      arguments: |
+        "$(baseImage)" "$(baseRegistry)" "$(baseTag)" "$(targetImage)" "$(acrName)"
 
-#   - task: AzureCLI@1
-#     displayName: 'Import docker image'
-#     condition: eq(variables['newTagFound'], 'true')
-#     inputs:
-#       azureSubscription: $(serviceConnection)
-#       scriptLocation: 'inlineScript'
-#       inlineScript: |
-#         echo "Importing $(baseRegistry)/$(baseImage):$(baseTag) ..."
-#         az acr import --force --name $(acrName) --source $(baseRegistry)/$(baseImage):$(baseTag) --image $(targetImage):$(baseTag)-$(baseDigest) 
+  - task: AzureCLI@1
+    displayName: 'Import docker image'
+    condition: eq(variables['newTagFound'], 'true')
+    inputs:
+      azureSubscription: $(serviceConnection)
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        echo "Importing $(baseRegistry)/$(baseImage):$(baseTag) ..."
+        az acr import --force --name $(acrName) --source $(baseRegistry)/$(baseImage):$(baseTag) --image $(targetImage):$(baseTag)-$(baseDigest) 
 
-# # Temporarily disable scan
-# # https://tools.hmcts.net/jira/browse/DTSPO-10310
-# #   - task: AzureCLI@1
-# #     displayName: 'Security scan new image'
-# #     condition: eq(variables['newTagFound'], 'true')
-# #     inputs:
-# #       azureSubscription: $(serviceConnection)
-# #       scriptLocation: 'scriptPath'
-# #       scriptPath: base-image-scan.sh
-# #       arguments: |
-# #         "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)" 
-# #         "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-new-admin-password)"
-
+# Temporarily disable scan
+# https://tools.hmcts.net/jira/browse/DTSPO-10310
 #   - task: AzureCLI@1
-#     displayName: 'Re-tag new image using the base tag'
-# #    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['scanPassed'], 'true'))
+#     displayName: 'Security scan new image'
 #     condition: eq(variables['newTagFound'], 'true')
 #     inputs:
 #       azureSubscription: $(serviceConnection)
 #       scriptLocation: 'scriptPath'
-#       scriptPath: tag-new-image.sh
+#       scriptPath: base-image-scan.sh
 #       arguments: |
-#         "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)" "$(acrDigest)" 
+#         "$(targetRegistry)" "$(targetImage)" "$(baseTag)-$(baseDigest)" "$(registry-public-username)" "$(registry-public-password)" 
+#         "$(registry-slack-webhook)" "$(neuvectorController)" "$(neuvector-admin-username)" "$(neuvector-new-admin-password)"
+
+  - task: AzureCLI@1
+    displayName: 'Re-tag new image using the base tag'
+#    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['scanPassed'], 'true'))
+    condition: eq(variables['newTagFound'], 'true')
+    inputs:
+      azureSubscription: $(serviceConnection)
+      scriptLocation: 'scriptPath'
+      scriptPath: tag-new-image.sh
+      arguments: |
+        "$(baseTag)" "$(targetImage)" "$(acrName)" "$(targetRegistry)" "$(baseDigest)" "$(acrDigest)" 
 
 - job: CreateACRCache
   pool:
