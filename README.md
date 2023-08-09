@@ -13,3 +13,5 @@ To create a new ACR cache on a repository you need to amend the acr-repositories
     destinationRepo: jenkins # destination repository as it appears in the ACR Cache
     tagVersion: "75c3e8818c" # The version of the image you need to pull into the Cache; before the image can be used in the cache it needs to be pulled into it by the pipeline
 ```
+
+The pipeline will also pull the docker image with the tag specified above into the cache.
