@@ -2,5 +2,5 @@ rules:
   postgresql:
     ruleName: postgresql
     repoName: bitnami/postgresql
-    destinationRepo: bitnami/postgresql
-    tagVersion: "11.16.0"
+    destinationRepo: imported/bitnami/postgresql
+    tagVersion: 11.16.0
