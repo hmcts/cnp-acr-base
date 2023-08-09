@@ -3,4 +3,4 @@ rules:
     ruleName: postgresql
     repoName: bitnami/postgresql
     destinationRepo: imported/bitnami/postgresql
-    tagVersion: latest
+    tagVersion: "11.16.0"
