@@ -1,11 +1,6 @@
 rules:
-  jenkins:
-    ruleName: Jenkins
-    repoName: hmcts/jenkins
-    destinationRepo: jenkins
-    tagVersion: "dc5c831"
-  ccd-definition-importer:
-    ruleName: ccd-definition-importer
-    repoName: hmcts/ccd-definition-importer
-    destinationRepo: ccd-definition-importer
+  postgresql:
+    ruleName: postgresql
+    repoName: bitnami/postgresql
+    destinationRepo: imported/bitnami/postgresql
     tagVersion: latest
