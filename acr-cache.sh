@@ -3,7 +3,7 @@
 set -e
 
 echo "Logging into ACR..."
-az acr login --name hmctspublic --subscription 8999dec3-0104-4a27-94ee-6588559729d1 --expose-token
+az acr login --name hmctspublic --subscription DCD-CNP-Prod --expose-token
 
 RULES_CONFIG=$(yq e acr-repositories.yaml -o=json)
 # echo $RULES_CONFIG
