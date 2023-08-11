@@ -16,6 +16,8 @@ for key in $(echo $RULES_CONFIG | jq -r '.rules | keys | .[]'); do
     echo "Creating ACR Cache for $key"
     az acr cache create -r hmctspublic -n $RULE_NAME -s docker.io/$REPO_NAME -t $DESTINATION_NAME
 
+
+    # Repository in ACR (if new) will not be created until docker pull command has been run for first time
     echo "Docker Image Pull"
     docker pull hmctspublic.azurecr.io/$DESTINATION_NAME:$TAG_VERSION
 done
