@@ -1,17 +1,23 @@
 # acr-base-importer
 Pipelines to automatically import updates to base images and scan them for vulnerabilities
 
-# ACR Cache
-The pipeline will also create ACR Caches into hmctspublic registry.
+# ACR Cache Rules
+The pipeline will also add ACR Cache Rules into hmctspublic registry.
 
-To create a new ACR cache on a repository you need to amend the acr-repositories.yaml file, to add the required details of the new cache. You need to add the following block of code, replacing the values of the parameters with the one you need creating. The below is just an example of an existing ACR Cache
+To create a new ACR cache rule on a repository you need to amend the [yaml file](acr-repositories.yaml), to add the required details of the new cache rule. You need to add the following block of code, replacing the values of the parameters with the one you need creating. The below is just an example of an existing ACR Cache rule
  
  ```
   jenkins: # this can be the same as the name of the repository
     ruleName: Jenkins # the name of the cache rule
-    repoName: hmcts/jenkins # the name of the repository
-    destinationRepo: jenkins # destination repository as it appears in the ACR Cache
-    tagVersion: "75c3e8818c" # The version of the image you need to pull into the Cache; before the image can be used in the cache it needs to be pulled into it by the pipeline
-```
+    repoName: hmcts/jenkins # the name of the repository the image is currently stored in
+    destinationRepo: jenkins # destination repository as it appears in the ACR Cache, will not be visibile until first instance of docker pull command
+ ```
 
-The pipeline will also pull the docker image with the tag specified above into the cache.
+# Supported Upstream Image Repositories
+
+Below is a table of upstream image repositories that will have supported cache rules in hmctspublic. No image tags are added by default, but will be added on the first running instance of `docker pull hmctspublic.azurecr.io/${destinationRepo}:image-tag`, where destinationRepo is the [mapped repository in our ACR for the upstream repository](acr-respositories.yaml), any upstream image tag is available.
+
+
+| Upstream Repository Name  | HMCTS Repository Name|
+| -------- | ------- |
+| bitnami/postgresql  | imported/bitnami/postgresql    |

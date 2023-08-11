@@ -1,6 +1,7 @@
+# Please update README.md with each new unique repoName added to this file as it represents another supported upstream image repository
+
 rules:
   postgresql:
     ruleName: postgresql
     repoName: bitnami/postgresql
     destinationRepo: imported/bitnami/postgresql
-    tagVersion: 11.16.0
