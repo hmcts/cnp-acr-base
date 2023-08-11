@@ -11,7 +11,10 @@ To create a new ACR cache rule on a repository you need to amend the [yaml file]
     ruleName: Jenkins # the name of the cache rule
     repoName: hmcts/jenkins # the name of the repository the image is stored in
     destinationRepo: jenkins # destination repository as it appears in Azure hmctspublic ACR, which the cache rule will be associated to and which will make up the URL to fetch the image. Will create a new repository if one does not exist.
-    tagVersion: "75c3e8818c" # The version of the image you need to pull into the Cache; before the image can be used in the cache it needs to be pulled into it by the pipeline
+    # Array of images that need pulling into the repository
+    images: 
+      - "75c3e8818c" # The version of the image you need to pull into the Cache; before the image can be used in the cache it needs to be pulled into it by the pipeline
+      - ...
 ```
 
 The pipeline will also pull the docker image with the tag specified above into the cache.
