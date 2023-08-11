@@ -18,6 +18,6 @@ To create a new ACR cache rule on a repository you need to amend the [yaml file]
 Below is a table of upstream image repositories that will have supported cache rules in hmctspublic. No image tags are added by default, but will be added on the first running instance of `docker pull hmctspublic.azurecr.io/${destinationRepo}:image-tag`, where destinationRepo is the [mapped repository in our ACR for the upstream repository](acr-respositories.yaml), any upstream image tag is available.
 
 
-| Upstream Repository Name  | HMCTS Repository Name|
+| **Upstream Repository Name**  | **HMCTS Repository Name** |
 | -------- | ------- |
 | bitnami/postgresql  | imported/bitnami/postgresql    |
