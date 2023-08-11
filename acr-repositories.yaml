@@ -4,3 +4,8 @@ rules:
     repoName: bitnami/postgresql
     destinationRepo: imported/bitnami/postgresql
     tagVersion: 11.16.0
+  external-dns: 
+    ruleName: external-dns
+    repoName: bitnami/external-dns
+    destinationRepo: imported/bitnami/external-dns
+    tagVersion: 0.13.3-debian-11-r3
