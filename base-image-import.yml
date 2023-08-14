@@ -16,7 +16,8 @@ variables:
   acrName: hmctspublic
   targetRegistry: hmctspublic.azurecr.io
   keyvaultName: 'infra-vault-prod'
-  serviceConnection: 'DCD-CNP-PROD'
+  serviceConnection: 'azurerm-prod'
+  cacheServiceConnection: 'DCD-CNP-PROD'
   keyvaultNameStg: 'cftapps-stg'
   serviceConnectionStg: 'DCD-CFTAPPS-STG'
   neuvectorController: 'https://neuvector01-api.aat.platform.hmcts.net'
@@ -149,6 +150,6 @@ jobs:
     - task: AzureCLI@1
       displayName: 'Create ACR Cache'
       inputs:
-        azureSubscription: $(serviceConnection)
+        azureSubscription: $(cacheServiceConnection)
         scriptLocation: 'scriptPath'
         scriptPath: acr-cache.sh
