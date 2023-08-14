@@ -7,7 +7,7 @@ Below is a table of upstream image repositories that will have supported cache r
 
 | **Upstream Repository Name**  | **HMCTS Repository Name** |
 | -------- | ------- |
-| bitnami/postgresql  | hmctspublic.azurecr.io/imported/bitnami/postgresql    |
+| `bitnami/postgresql`  | `hmctspublic.azurecr.io/imported/bitnami/postgresql`    |
 
 
 ### ACR Cache Rules
