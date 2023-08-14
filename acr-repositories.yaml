@@ -75,7 +75,7 @@ rules:
     destinationRepo: imported/neuvector/updater
   traefik:
     ruleName: traefik
-    repoName: traefik
+    repoName: library/traefik
     destinationRepo: imported/traefik
   configmap-reload:
     ruleName: configmap-reload
@@ -95,7 +95,7 @@ rules:
     destinationRepo: imported/mailhog/mailhog
   nats:
     ruleName: nats-rule
-    repoName: nats
+    repoName: library/nats
     destinationRepo: imported/nats
   nats-server-config-reloader:  
     ruleName: nats-server-config-reloader
@@ -111,7 +111,7 @@ rules:
     destinationRepo: imported/netboxcommunity/netbox
   nginx:  
     ruleName: nginx
-    repoName: nginx
+    repoName: library/nginx
     destinationRepo: imported/nginx
   opentelemtry-collector:  
     ruleName: opentelemetry-collector
