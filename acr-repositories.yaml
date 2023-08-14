@@ -22,7 +22,7 @@ rules:
     repoName: dius/pact-broker
     destinationRepo: imported/dius/pact-broker
   tel2:
-    ruleName: tel2
+    ruleName: datawire-tel2
     repoName: datawire/tel2
     destinationRepo: imported/datawire/tel2
   service-catalog:
@@ -94,7 +94,7 @@ rules:
     repoName: mailhog/mailhog
     destinationRepo: imported/mailhog/mailhog
   nats:
-    ruleName: nats
+    ruleName: nats-rule
     repoName: nats
     destinationRepo: imported/nats
   nats-server-config-reloader:  
