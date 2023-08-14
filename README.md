@@ -47,6 +47,6 @@ To create a new ACR cache rule on a repository you need to amend the [yaml file]
  ```
   jenkins: # this can be the same as the name of the repository
     ruleName: Jenkins # the name of the cache rule
-    repoName: hmcts/jenkins # the name of the repository the image is currently stored in
+    repoName: hmcts/jenkins # the name of the repository the image is currently stored in. Should always be format of publisher/image. If there is no publisher, please use "library".
     destinationRepo: jenkins # destination repository as it appears in the ACR Cache, will not be visibile until first instance of docker pull command
  ```
