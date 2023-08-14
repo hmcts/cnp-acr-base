@@ -1,6 +1,127 @@
+# Please update README.md with each new unique repoName added to this file as it represents another supported upstream image repository
+
 rules:
   postgresql:
     ruleName: postgresql
     repoName: bitnami/postgresql
     destinationRepo: imported/bitnami/postgresql
-    tagVersion: 11.16.0
+  external-dns:
+    ruleName: external-dns
+    repoName: bitnami/external-dns
+    destinationRepo: imported/bitnami/external-dns
+  kubectl:
+    ruleName: kubectl
+    repoName: bitnami/kubectl
+    destinationRepo: imported/bitnami/kubectl
+  redis:
+    ruleName: redis
+    repoName: bitnami/redis
+    destinationRepo: imported/bitnami/redis
+  pact-broker:
+    ruleName: pact-broker
+    repoName: dius/pact-broker
+    destinationRepo: imported/dius/pact-broker
+  tel2:
+    ruleName: tel2
+    repoName: datawire/tel2
+    destinationRepo: imported/datawire/tel2
+  service-catalog:
+    ruleName: service-catalog
+    repoName: drycc/service-catalog
+    destinationRepo: imported/drycc/service-catalog
+  dynatrace-operator:
+    ruleName: dynatrace-operator
+    repoName: dynatrace/dynatrace-operator
+    destinationRepo: imported/dynatrace/dynatrace-operator
+  fluent-bit:
+    ruleName: fluent-bit
+    repoName: fluent/fluent-bit
+    destinationRepo: imported/fluent/fluent-bit
+  grafana:
+    ruleName: grafana
+    repoName: grafana/grafana
+    destinationRepo: imported/grafana
+  testkube-api-server:
+    ruleName: testkube-api-server
+    repoName: kubeshop/testkube-api-server
+    destinationRepo: imported/kubeshop/testkube-api-server
+  testkube-dashboard:
+    ruleName: testkube-dashboard
+    repoName: kubeshop/testkube-dashboard
+    destinationRepo: imported/kubeshop/testkube-dashboard
+  testkube-operator:
+    ruleName: testkube-operator
+    repoName: kubeshop/testkube-operator
+    destinationRepo: imported/kubeshop/testkube-operator
+  minio:
+    ruleName: minio
+    repoName: minio/minio
+    destinationRepo: imported/minio/minio
+  neuvector-controller:
+    ruleName: nuevector-controller
+    repoName: neuvector/controller
+    destinationRepo: imported/neuvector/controller
+  neuvector-enforcer:
+    ruleName: nuevector-enforcer
+    repoName: neuvector/enforcer
+    destinationRepo: imported/neuvector/enforcer
+  neuvector-manager:
+    ruleName: nuevector-manager
+    repoName: neuvector/manager
+    destinationRepo: imported/neuvector/manager
+  neuvector-scanner:
+    ruleName: nuevector-scanner
+    repoName: neuvector/updater
+    destinationRepo: imported/neuvector/updater
+  traefik:
+    ruleName: traefik
+    repoName: traefik
+    destinationRepo: imported/traefik
+  configmap-reload:
+    ruleName: configmap-reload
+    repoName: jimmidyson/configmap-reload
+    destinationRepo: imported/jimmidyson/configmap-reload
+  k8s-sidecar:
+    ruleName: k8s-sidecar
+    repoName: kiwigrid/k8s-sidecar
+    destinationRepo: imported/kiwigrid/k8s-sidecar
+  openssh-server:
+    ruleName: openssh-server
+    repoName: linuxserver/openssh-server
+    destinationRepo: imported/linuxserver/openssh-server
+  mailhog:
+    ruleName: mailhog
+    repoName: mailhog/mailhog
+    destinationRepo: imported/mailhog/mailhog
+  nats:
+    ruleName: nats
+    repoName: nats
+    destinationRepo: imported/nats
+  nats-server-config-reloader:  
+    ruleName: nats-server-config-reloader
+    repoName: natsio/nats-server-config-reloader
+    destinationRepo: imported/natsio/nats-server-config-reloader
+  prometheus-nats-exporter:  
+    ruleName: prometheus-nats-exporter
+    repoName: natsio/prometheus-nats-exporter
+    destinationRepo: imported/natsio/prometheus-nats-exporter
+  netbox:  
+    ruleName: netbox
+    repoName: netboxcommunity/netbox
+    destinationRepo: imported/netboxcommunity/netbox
+  nginx:  
+    ruleName: nginx
+    repoName: nginx
+    destinationRepo: imported/nginx
+  opentelemtry-collector:  
+    ruleName: opentelemetry-collector
+    repoName: otel/opentelemetry-collector-contrib
+    destinationRepo: imported/otel/opentelemetry-collector-contrib
+  node-exporter:  
+    ruleName: node-exporter
+    repoName: prom/node-exporter
+    destinationRepo: imported/prom/node-exporter
+  kube-slack:  
+    ruleName: kube-slack
+    repoName: willwill/kube-slack
+    destinationRepo: imported/willwill/kube-slack

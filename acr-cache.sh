@@ -11,11 +11,7 @@ for key in $(echo $RULES_CONFIG | jq -r '.rules | keys | .[]'); do
     RULE_NAME=$(echo $RULES_CONFIG | jq -r '.rules | ."'$key'" | .ruleName')
     REPO_NAME=$(echo $RULES_CONFIG | jq -r '.rules | ."'$key'" | .repoName')
     DESTINATION_NAME=$(echo $RULES_CONFIG | jq -r '.rules | ."'$key'" | .destinationRepo')
-    TAG_VERSION=$(echo $RULES_CONFIG | jq -r '.rules | ."'$key'" | .tagVersion')
 
-    echo "Creating ACR Cache for $key"
+    echo "Creating ACR Cache Rule for $key"
     az acr cache create -r hmctspublic -n $RULE_NAME -s docker.io/$REPO_NAME -t $DESTINATION_NAME
-
-    echo "Docker Image Pull"
-    docker pull hmctspublic.azurecr.io/$DESTINATION_NAME:$TAG_VERSION
 done
