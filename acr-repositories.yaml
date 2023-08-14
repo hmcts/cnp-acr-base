@@ -125,7 +125,3 @@ rules:
     ruleName: kube-slack
     repoName: willwill/kube-slack
     destinationRepo: imported/willwill/kube-slack
-
-
-
-
