@@ -71,6 +71,10 @@ rules:
     destinationRepo: imported/neuvector/manager
   neuvector-scanner:
     ruleName: nuevector-scanner
+    repoName: neuvector/scanner
+    destinationRepo: imported/neuvector/scanner
+  neuvector-updater:
+    ruleName: nuevector-updater
     repoName: neuvector/updater
     destinationRepo: imported/neuvector/updater
   traefik:
