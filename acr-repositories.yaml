@@ -58,23 +58,23 @@ rules:
     repoName: minio/minio
     destinationRepo: imported/minio/minio
   neuvector-controller:
-    ruleName: nuevector-controller
+    ruleName: neuvector-controller
     repoName: neuvector/controller
     destinationRepo: imported/neuvector/controller
   neuvector-enforcer:
-    ruleName: nuevector-enforcer
+    ruleName: neuvector-enforcer
     repoName: neuvector/enforcer
     destinationRepo: imported/neuvector/enforcer
   neuvector-manager:
-    ruleName: nuevector-manager
+    ruleName: neuvector-manager
     repoName: neuvector/manager
     destinationRepo: imported/neuvector/manager
   neuvector-scanner:
-    ruleName: nuevector-scanner
+    ruleName: neuvector-scanner
     repoName: neuvector/scanner
     destinationRepo: imported/neuvector/scanner
   neuvector-updater:
-    ruleName: nuevector-updater
+    ruleName: neuvector-updater
     repoName: neuvector/updater
     destinationRepo: imported/neuvector/updater
   traefik:
