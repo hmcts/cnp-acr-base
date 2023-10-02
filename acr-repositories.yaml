@@ -3,133 +3,133 @@
 rules:
   postgresql:
     ruleName: postgresql
-    repoName: docker.io/bitnami/postgresql
+    repoName: bitnami/postgresql
     destinationRepo: imported/bitnami/postgresql
   elastic-search:
     ruleName: elastic-search
-    repoName: docker.io/elasticsearch/elasticsearch
+    repoName: elasticsearch/elasticsearch
     destinationRepo: imported/elasticsearch/elasticsearch
   external-dns:
     ruleName: external-dns
-    repoName: docker.io/bitnami/external-dns
+    repoName: bitnami/external-dns
     destinationRepo: imported/bitnami/external-dns
   kubectl:
     ruleName: kubectl
-    repoName: docker.io/bitnami/kubectl
+    repoName: bitnami/kubectl
     destinationRepo: imported/bitnami/kubectl
   redis:
     ruleName: redis
-    repoName: docker.io/bitnami/redis
+    repoName: bitnami/redis
     destinationRepo: imported/bitnami/redis
   pact-broker:
     ruleName: pact-broker
-    repoName: docker.io/dius/pact-broker
+    repoName: dius/pact-broker
     destinationRepo: imported/dius/pact-broker
   tel2:
     ruleName: datawire-tel2
-    repoName: docker.io/datawire/tel2
+    repoName: datawire/tel2
     destinationRepo: imported/datawire/tel2
   service-catalog:
     ruleName: service-catalog
-    repoName: docker.io/drycc/service-catalog
+    repoName: drycc/service-catalog
     destinationRepo: imported/drycc/service-catalog
   dynatrace-operator:
     ruleName: dynatrace-operator
-    repoName: docker.io/dynatrace/dynatrace-operator
+    repoName: dynatrace/dynatrace-operator
     destinationRepo: imported/dynatrace/dynatrace-operator
   fluent-bit:
     ruleName: fluent-bit
-    repoName: docker.io/fluent/fluent-bit
+    repoName: fluent/fluent-bit
     destinationRepo: imported/fluent/fluent-bit
   grafana:
     ruleName: grafana
-    repoName: docker.io/grafana/grafana
+    repoName: grafana/grafana
     destinationRepo: imported/grafana
   testkube-api-server:
     ruleName: testkube-api-server
-    repoName: docker.io/kubeshop/testkube-api-server
+    repoName: kubeshop/testkube-api-server
     destinationRepo: imported/kubeshop/testkube-api-server
   testkube-dashboard:
     ruleName: testkube-dashboard
-    repoName: docker.io/kubeshop/testkube-dashboard
+    repoName: kubeshop/testkube-dashboard
     destinationRepo: imported/kubeshop/testkube-dashboard
   testkube-operator:
     ruleName: testkube-operator
-    repoName: docker.io/kubeshop/testkube-operator
+    repoName: kubeshop/testkube-operator
     destinationRepo: imported/kubeshop/testkube-operator
   minio:
     ruleName: minio
-    repoName: docker.io/minio/minio
+    repoName: minio/minio
     destinationRepo: imported/minio/minio
   neuvector-controller:
     ruleName: neuvector-controller
-    repoName: docker.io/neuvector/controller
+    repoName: neuvector/controller
     destinationRepo: imported/neuvector/controller
   neuvector-enforcer:
     ruleName: neuvector-enforcer
-    repoName: docker.io/neuvector/enforcer
+    repoName: neuvector/enforcer
     destinationRepo: imported/neuvector/enforcer
   neuvector-manager:
     ruleName: neuvector-manager
-    repoName: docker.io/neuvector/manager
+    repoName: neuvector/manager
     destinationRepo: imported/neuvector/manager
   neuvector-scanner:
     ruleName: neuvector-scanner
-    repoName: docker.io/neuvector/scanner
+    repoName: neuvector/scanner
     destinationRepo: imported/neuvector/scanner
   neuvector-updater:
     ruleName: neuvector-updater
-    repoName: docker.io/neuvector/updater
+    repoName: neuvector/updater
     destinationRepo: imported/neuvector/updater
   traefik:
     ruleName: traefik
-    repoName: docker.io/library/traefik
+    repoName: library/traefik
     destinationRepo: imported/traefik
   configmap-reload:
     ruleName: configmap-reload
-    repoName: docker.io/jimmidyson/configmap-reload
+    repoName: jimmidyson/configmap-reload
     destinationRepo: imported/jimmidyson/configmap-reload
   k8s-sidecar:
     ruleName: k8s-sidecar
-    repoName: docker.io/kiwigrid/k8s-sidecar
+    repoName: kiwigrid/k8s-sidecar
     destinationRepo: imported/kiwigrid/k8s-sidecar
   openssh-server:
     ruleName: openssh-server
-    repoName: docker.io/linuxserver/openssh-server
+    repoName: linuxserver/openssh-server
     destinationRepo: imported/linuxserver/openssh-server
   mailhog:
     ruleName: mailhog
-    repoName: docker.io/mailhog/mailhog
+    repoName: mailhog/mailhog
     destinationRepo: imported/mailhog/mailhog
   nats:
     ruleName: nats-rule
-    repoName: docker.io/library/nats
+    repoName: library/nats
     destinationRepo: imported/nats
   nats-server-config-reloader:  
     ruleName: nats-server-config-reloader
-    repoName: docker.io/natsio/nats-server-config-reloader
+    repoName: natsio/nats-server-config-reloader
     destinationRepo: imported/natsio/nats-server-config-reloader
   prometheus-nats-exporter:  
     ruleName: prometheus-nats-exporter
-    repoName: docker.io/natsio/prometheus-nats-exporter
+    repoName: natsio/prometheus-nats-exporter
     destinationRepo: imported/natsio/prometheus-nats-exporter
   netbox:  
     ruleName: netbox
-    repoName: docker.io/netboxcommunity/netbox
+    repoName: netboxcommunity/netbox
     destinationRepo: imported/netboxcommunity/netbox
   nginx:  
     ruleName: nginx
-    repoName: docker.io/library/nginx
+    repoName: library/nginx
     destinationRepo: imported/nginx
   opentelemtry-collector:  
     ruleName: opentelemetry-collector
-    repoName: docker.io/otel/opentelemetry-collector-contrib
+    repoName: otel/opentelemetry-collector-contrib
     destinationRepo: imported/otel/opentelemetry-collector-contrib
   node-exporter:  
     ruleName: node-exporter
-    repoName: docker.io/prom/node-exporter
+    repoName: prom/node-exporter
     destinationRepo: imported/prom/node-exporter
   kube-slack:  
     ruleName: kube-slack
-    repoName: docker.io/willwill/kube-slack
+    repoName: willwill/kube-slack
     destinationRepo: imported/willwill/kube-slack
