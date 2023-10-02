@@ -13,5 +13,5 @@ for key in $(echo $RULES_CONFIG | jq -r '.rules | keys | .[]'); do
     DESTINATION_NAME=$(echo $RULES_CONFIG | jq -r '.rules | ."'$key'" | .destinationRepo')
 
     echo "Creating ACR Cache Rule for $key"
-    az acr cache create -r hmctspublic -n $RULE_NAME -s docker.io/$REPO_NAME -t $DESTINATION_NAME
+    az acr cache create -r hmctspublic -n $RULE_NAME -s $REPO_NAME -t $DESTINATION_NAME
 done
