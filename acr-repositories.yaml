@@ -5,6 +5,10 @@ rules:
     ruleName: postgresql
     repoName: docker.io/bitnami/postgresql
     destinationRepo: imported/bitnami/postgresql
+  elastic-search:
+    ruleName: elastic-search
+    repoName: docker.elastic.co/elasticsearch/elasticsearch
+    destinationRepo: imported/elasticsearch/elasticsearch
   external-dns:
     ruleName: external-dns
     repoName: docker.io/bitnami/external-dns
