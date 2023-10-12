@@ -34,6 +34,7 @@ Below is a table of upstream image repositories that will have supported cache r
 | `neuvector/updater`                  | `hmctspublic.azurecr.io/imported/neuvector/updater`       |
 | `netboxcommunity/netbox`             | `hmctspublic.azurecr.io/imported/netboxcommunity/netbox`  |
 | `nginx`                              | `hmctspublic.azurecr.io/imported/nginx`                   |
+| `node`                               | `hmctspublic.azurecr.io/imported/library/node`            |
 | `otel/opentelemetry-collector-contrib` | `hmctspublic.azurecr.io/imported/otel/opentelemetry-collector/contrib` |
 | `prom/node-exporter`                 | `hmctspublic.azurecr.io/imported/prom/node-exporter`       |
 | `traefik`                            | `hmctspublic.azurecr.io/imported/traefik`                 |

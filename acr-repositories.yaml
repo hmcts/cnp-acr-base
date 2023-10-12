@@ -117,6 +117,10 @@ rules:
     ruleName: netbox
     repoName: netboxcommunity/netbox
     destinationRepo: imported/netboxcommunity/netbox
+  nodejs:
+    ruleName: nodejs
+    repoName: library/node
+    destinationRepo: imported/library/node
   nginx:  
     ruleName: nginx
     repoName: library/nginx
