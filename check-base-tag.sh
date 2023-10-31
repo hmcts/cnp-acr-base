@@ -23,7 +23,7 @@ fi
 echo "Base registry current digest for ${baseImage}:${baseTag}: [${_digest}]"
 
 _acr_digest=$(az acr manifest list-metadata --registry $acrName --name $targetImage \
- --query "[?not_null(tags[])]|[?contains(tags, \`\"${baseTag}\"\`)].digest|[0]" -o tsv)
+ --query "[?not_null(tags[])]|[?contains(tags, \`\"${baseTag}\"\`)].digest|[0]" -o tsv || echo "")
 
 echo "Target registry current digest for ${baseImage}:${baseTag}: [${_acr_digest}]"
 
