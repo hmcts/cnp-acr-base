@@ -20,7 +20,7 @@ variables:
   keyvaultNameStg: 'cftapps-stg'
   serviceConnectionStg: 'DCD-CFTAPPS-STG'
   # neuvectorController: 'https://neuvector01-api.aat.platform.hmcts.net'
-  neuvectorController: 'https://cft-neuvector00.aat.platform.hmcts.net/'
+  neuvectorController: 'https://cft-neuvector00-api.aat.platform.hmcts.net/'
 
 jobs:
 - job: ImportBaseImages
