@@ -28,42 +28,47 @@ jobs:
   strategy:
     maxParallel: 5
     matrix:
-      clamav-mock-100-citizensadvice:
-        baseImage: citizensadvice/clamav-mock
-        baseRegistry: docker.io
-        baseTag: 1.0.0
-        targetImage: imported/citizensadvice/clamav-mock
-      openjdk-21-distroless:
-        baseImage: distroless/java21-debian12
-        baseRegistry: gcr.io
-        baseTag: latest
-        targetImage: imported/distroless/java21
-      openjdk-21-debug-distroless:
-        baseImage: distroless/java21-debian12
-        baseRegistry: gcr.io
-        baseTag: debug
-        targetImage: imported/distroless/java21
-      openjdk-17-distroless:
-        baseImage: distroless/java17-debian11
-        baseRegistry: gcr.io
-        baseTag: latest
-        targetImage: imported/distroless/java17
+      # clamav-mock-100-citizensadvice:
+      #   baseImage: citizensadvice/clamav-mock
+      #   baseRegistry: docker.io
+      #   baseTag: 1.0.0
+      #   targetImage: imported/citizensadvice/clamav-mock
+      # openjdk-21-distroless:
+      #   baseImage: distroless/java21-debian12
+      #   baseRegistry: gcr.io
+      #   baseTag: latest
+      #   targetImage: imported/distroless/java21
+      # openjdk-21-debug-distroless:
+      #   baseImage: distroless/java21-debian12
+      #   baseRegistry: gcr.io
+      #   baseTag: debug
+      #   targetImage: imported/distroless/java21
+      # openjdk-17-distroless:
+      #   baseImage: distroless/java17-debian11
+      #   baseRegistry: gcr.io
+      #   baseTag: latest
+      #   targetImage: imported/distroless/java17
       openjdk-17-debug-distroless:
         baseImage: distroless/java17-debian11
         baseRegistry: gcr.io
         baseTag: debug
         targetImage: imported/distroless/java17
-      ruby2.7.6-slim-buster:
-        baseImage: library/ruby
-        baseRegistry: docker.io
-        baseTag: 2.7.6-slim-buster
-        targetImage: imported/library/ruby
-      ruby3.2.2-slim-buster:
-        baseImage: library/ruby
-        baseRegistry: docker.io
-        baseTag: 3.2.2-slim-buster
-        targetImage: imported/library/ruby
-
+      # ruby2.7.6-slim-buster:
+      #   baseImage: library/ruby
+      #   baseRegistry: docker.io
+      #   baseTag: 2.7.6-slim-buster
+      #   targetImage: imported/library/ruby
+      # ruby3.2.2-slim-buster:
+      #   baseImage: library/ruby
+      #   baseRegistry: docker.io
+      #   baseTag: 3.2.2-slim-buster
+      #   targetImage: imported/library/ruby
+      # ruby3.2.2-slim-buster:
+      #   baseImage: library/ruby
+      #   baseRegistry: docker.io
+      #   baseTag: 3.2.2-slim-buster
+      #   targetImage: imported/library/ruby
+      
   steps:
   - task: AzureKeyVault@1
     displayName: 'Get secrets from Keyvault'
