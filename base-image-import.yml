@@ -44,12 +44,12 @@ jobs:
         baseTag: debug
         targetImage: imported/distroless/java21
       openjdk-17-distroless:
-        baseImage: distroless/java17-debian11
+        baseImage: distroless/java17-debian12
         baseRegistry: gcr.io
         baseTag: latest
         targetImage: imported/distroless/java17
       openjdk-17-debug-distroless:
-        baseImage: distroless/java17-debian11
+        baseImage: distroless/java17-debian12
         baseRegistry: gcr.io
         baseTag: debug
         targetImage: imported/distroless/java17
