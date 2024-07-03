@@ -141,3 +141,11 @@ rules:
     ruleName: kube-slack
     repoName: willwill/kube-slack
     destinationRepo: imported/willwill/kube-slack
+  jq:
+    ruleName: jq
+    repoName: jqlang/jq
+    destinationRepo: imported/jqlang/jq
+  oathtool:
+    ruleName: oathtool
+    repoName: toolbelt/oathtool
+    destinationRepo: imported/toolbelt/oathtool
