@@ -7,7 +7,7 @@ rules:
     destinationRepo: imported/bitnami/postgresql
   postgres:
     ruleName: postgres
-    repoName: postgres
+    repoName: library/postgres
     destinationRepo: imported/postgres
   elastic-search:
     ruleName: elastic-search
@@ -109,15 +109,15 @@ rules:
     ruleName: nats-rule
     repoName: library/nats
     destinationRepo: imported/nats
-  nats-server-config-reloader:  
+  nats-server-config-reloader:
     ruleName: nats-server-config-reloader
     repoName: natsio/nats-server-config-reloader
     destinationRepo: imported/natsio/nats-server-config-reloader
-  prometheus-nats-exporter:  
+  prometheus-nats-exporter:
     ruleName: prometheus-nats-exporter
     repoName: natsio/prometheus-nats-exporter
     destinationRepo: imported/natsio/prometheus-nats-exporter
-  netbox:  
+  netbox:
     ruleName: netbox
     repoName: netboxcommunity/netbox
     destinationRepo: imported/netboxcommunity/netbox
@@ -125,19 +125,19 @@ rules:
     ruleName: nodejs
     repoName: library/node
     destinationRepo: imported/library/node
-  nginx:  
+  nginx:
     ruleName: nginx
     repoName: library/nginx
     destinationRepo: imported/nginx
-  opentelemtry-collector:  
+  opentelemtry-collector:
     ruleName: opentelemetry-collector
     repoName: otel/opentelemetry-collector-contrib
     destinationRepo: imported/otel/opentelemetry-collector-contrib
-  node-exporter:  
+  node-exporter:
     ruleName: node-exporter
     repoName: prom/node-exporter
     destinationRepo: imported/prom/node-exporter
-  kube-slack:  
+  kube-slack:
     ruleName: kube-slack
     repoName: willwill/kube-slack
     destinationRepo: imported/willwill/kube-slack
