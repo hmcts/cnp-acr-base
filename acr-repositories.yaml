@@ -149,3 +149,7 @@ rules:
     ruleName: oathtool
     repoName: toolbelt/oathtool
     destinationRepo: imported/toolbelt/oathtool
+  ryuk:
+    ruleName: ryuk
+    repoName: testcontainers/ryuk
+    destinationRepo: imported/testcontainers/ryuk
