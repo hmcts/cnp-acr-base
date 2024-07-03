@@ -142,7 +142,7 @@ rules:
     repoName: willwill/kube-slack
     destinationRepo: imported/willwill/kube-slack
   jq:
-    ruleName: jq
+    ruleName: jq-cache
     repoName: jqlang/jq
     destinationRepo: imported/jqlang/jq
   oathtool:
