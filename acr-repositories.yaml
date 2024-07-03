@@ -150,6 +150,6 @@ rules:
     repoName: toolbelt/oathtool
     destinationRepo: imported/toolbelt/oathtool
   ryuk:
-    ruleName: ryuk
+    ruleName: ryuk-cache
     repoName: testcontainers/ryuk
     destinationRepo: imported/testcontainers/ryuk
