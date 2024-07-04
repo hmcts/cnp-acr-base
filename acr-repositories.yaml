@@ -162,3 +162,7 @@ rules:
     ruleName: redis
     repoName: library/redis
     destinationRepo: imported/redis
+  testcontainers-sshd:
+    ruleName: testcontainers-sshd
+    repoName: testcontainers/sshd
+    destinationRepo: imported/testcontainers/sshd
