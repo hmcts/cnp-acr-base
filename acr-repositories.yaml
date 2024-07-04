@@ -162,6 +162,10 @@ rules:
     ruleName: redis
     repoName: library/redis
     destinationRepo: imported/redis
+  testcontainers-sshd:
+    ruleName: testcontainers-sshd
+    repoName: testcontainers/sshd
+    destinationRepo: imported/testcontainers/sshd
   williamyeh-java8:
     ruleName: williamyeh-java8
     repoName: williamyeh/java8

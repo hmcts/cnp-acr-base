@@ -44,6 +44,7 @@ Below is a table of upstream image repositories that will have supported cache r
 | `prom/node-exporter`                   | `hmctspublic.azurecr.io/imported/prom/node-exporter`                   |
 | `redis`                                | `hmctspublic.azurecr.io/imported/library/redis`                        |
 | `testcontainers/ryuk`                  | `hmctspublic.azurecr.io/imported/testcontainers/ryuk`                  |
+| `testcontainers/sshd`                  | `hmctspublic.azurecr.io/imported/testcontainers/sshd`                  |
 | `toolbelt/oathtool`                    | `hmctspublic.azurecr.io/imported/toolbelt/oathtool`                    |
 | `traefik`                              | `hmctspublic.azurecr.io/imported/traefik`                              |
 | `willwill/kube-slack`                  | `hmctspublic.azurecr.io/imported/willwill/kube-slack`                  |
