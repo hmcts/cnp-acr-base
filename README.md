@@ -7,6 +7,7 @@ Below is a table of upstream image repositories that will have supported cache r
 
 | **Upstream Repository Name**           | **HMCTS Repository Name**                                              |
 |----------------------------------------|------------------------------------------------------------------------|
+| `alpine`                               | `hmctspublic.azurecr.io/imported/alpine`                               |
 | `bitnami/external-dns`                 | `hmctspublic.azurecr.io/imported/bitnami/external-dns`                 |
 | `bitnami/kubectl`                      | `hmctspublic.azurecr.io/imported/bitnami/kubectl`                      |
 | `bitnami/postgresql`                   | `hmctspublic.azurecr.io/imported/bitnami/postgresql`                   |
