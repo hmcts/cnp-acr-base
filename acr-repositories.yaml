@@ -154,3 +154,7 @@ rules:
     ruleName: ryuk-cache
     repoName: testcontainers/ryuk
     destinationRepo: imported/testcontainers/ryuk
+  alpine:
+    ruleName: alpine
+    repoName: alpine
+    destinationRepo: imported/alpine
