@@ -6,7 +6,7 @@ Below is a table of upstream image repositories that will have supported cache r
 
 
 | **Upstream Repository Name**           | **HMCTS Repository Name**                                              |
-| -------------------------------------- | ---------------------------------------------------------------------- |
+|----------------------------------------|------------------------------------------------------------------------|
 | `bitnami/external-dns`                 | `hmctspublic.azurecr.io/imported/bitnami/external-dns`                 |
 | `bitnami/kubectl`                      | `hmctspublic.azurecr.io/imported/bitnami/kubectl`                      |
 | `bitnami/postgresql`                   | `hmctspublic.azurecr.io/imported/bitnami/postgresql`                   |
@@ -15,14 +15,16 @@ Below is a table of upstream image repositories that will have supported cache r
 | `dius/pact-broker`                     | `hmctspublic.azurecr.io/imported/dius/pact-broker`                     |
 | `drycc/service-catalog`                | `hmctspublic.azurecr.io/imported/dyrcc/service-catalog`                |
 | `dynatrace/dynatrace-operator`         | `hmctspublic.azurecr.io/imported/dynatrace/dynatrace-operator`         |
+| `elasticsearch/elasticsearch`          | `hmctspublic.azurecr.io/imported/elasticsearch/elasticsearch`          |
 | `fluent/fluent-bit`                    | `hmctspublic.azurecr.io/imported/fluent/fluent-bit`                    |
 | `grafana/grafana`                      | `hmctspublic.azurecr.io/imported/grafana`                              |
 | `jimmidyson/configmap-reload`          | `hmctspublic.azurecr.io/imported/jimmidyson/configmap-reload`          |
+| `jqlang/jq`                            | `hmctspublic.azurecr.io/imported/jqlang/jq`                            |
 | `kiwigrid/k8s-sidecar`                 | `hmctspublic.azurecr.io/imported/kiwigrid/k8s-sidecar`                 |
 | `kubeshop/testkube-api-server`         | `hmctspublic.azurecr.io/imported/kubeshop/testkube-api-server`         |
 | `kubeshop/testkube-dashboard`          | `hmctspublic.azurecr.io/imported/kubeshop/testkube-dashboard`          |
 | `kubeshop/testkube-operator`           | `hmctspublic.azurecr.io/imported/kubeshop/testkube-operator`           |
-| `linuxserver/openssh-server`           | `hmctspublic.azurecr.io/imported/linuxserver/openssh-server`           |
+| `linuxserver/openssh-server`           | `hmctspublic.azurecr.io/imported/linuxserver/openssh-server`           | 
 | `mailhog/mailhog`                      | `hmctspublic.azurecr.io/imported/mailhog/mailhog`                      |
 | `minio/minio`                          | `hmctspublic.azurecr.io/imported/minio/minio`                          |
 | `nats`                                 | `hmctspublic.azurecr.io/imported/nats`                                 |
@@ -31,17 +33,18 @@ Below is a table of upstream image repositories that will have supported cache r
 | `neuvector/controller`                 | `hmctspublic.azurecr.io/imported/neuvector/controller`                 |
 | `neuvector/enforcer`                   | `hmctspublic.azurecr.io/imported/neuvector/enforcer`                   |
 | `neuvector/manager`                    | `hmctspublic.azurecr.io/imported/neuvector/manager`                    |
+| `neuvector/scanner`                    | `hmctspublic.azurecr.io/imported/neuvector/scanner`                    |
 | `neuvector/updater`                    | `hmctspublic.azurecr.io/imported/neuvector/updater`                    |
 | `netboxcommunity/netbox`               | `hmctspublic.azurecr.io/imported/netboxcommunity/netbox`               |
 | `nginx`                                | `hmctspublic.azurecr.io/imported/nginx`                                |
 | `node`                                 | `hmctspublic.azurecr.io/imported/library/node`                         |
 | `otel/opentelemetry-collector-contrib` | `hmctspublic.azurecr.io/imported/otel/opentelemetry-collector/contrib` |
+| `postgres`                             | `hmctspublic.azurecr.io/imported/postgres`                             |
 | `prom/node-exporter`                   | `hmctspublic.azurecr.io/imported/prom/node-exporter`                   |
+| `testcontainers/ryuk`                  | `hmctspublic.azurecr.io/imported/testcontainers/ryuk`                  |
+| `toolbelt/oathtool`                    | `hmctspublic.azurecr.io/imported/toolbelt/oathtool`                    |
 | `traefik`                              | `hmctspublic.azurecr.io/imported/traefik`                              |
 | `willwill/kube-slack`                  | `hmctspublic.azurecr.io/imported/willwill/kube-slack`                  |
-| `postgres`                             | `hmctspublic.azurecr.io/imported/postgres`                             |
-| `toolbelt/oathtool`                    | `hmctspublic.azurecr.io/imported/toolbelt/oathtool`                    |
-| `jqlang/jq`                            | `hmctspublic.azurecr.io/imported/jqlang/jq`                            |
 
 ### ACR Cache Rules
 The pipeline will also add ACR Cache Rules into hmctspublic registry.
@@ -50,7 +53,7 @@ To create a new ACR cache rule on a repository you need to amend the [yaml file]
  
  ```
   jenkins: # this can be the same as the name of the repository
-    ruleName: Jenkins # the name of the cache rule
+    ruleName: Jenkins # the name of the cache rule.  Must be more than 4 characters in length.
     repoName: hmcts/jenkins # the name of the repository the image is currently stored in. Should always be format of publisher/image. If there is no publisher, please use "library".
     destinationRepo: jenkins # destination repository as it appears in the ACR Cache, will not be visibile until first instance of docker pull command
  ```
