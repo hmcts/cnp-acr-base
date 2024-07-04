@@ -161,4 +161,4 @@ rules:
   redis:
     ruleName: redis
     repoName: library/redis
-    destinationRepo: library/redis
+    destinationRepo: imported/redis
