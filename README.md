@@ -42,6 +42,7 @@ Below is a table of upstream image repositories that will have supported cache r
 | `otel/opentelemetry-collector-contrib` | `hmctspublic.azurecr.io/imported/otel/opentelemetry-collector/contrib` |
 | `postgres`                             | `hmctspublic.azurecr.io/imported/postgres`                             |
 | `prom/node-exporter`                   | `hmctspublic.azurecr.io/imported/prom/node-exporter`                   |
+| `redis`                                | `hmctspublic.azurecr.io/imported/library/redis`                        |
 | `testcontainers/ryuk`                  | `hmctspublic.azurecr.io/imported/testcontainers/ryuk`                  |
 | `toolbelt/oathtool`                    | `hmctspublic.azurecr.io/imported/toolbelt/oathtool`                    |
 | `traefik`                              | `hmctspublic.azurecr.io/imported/traefik`                              |
