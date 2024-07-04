@@ -5,40 +5,43 @@ Pipelines to automatically import updates to base images and scan them for vulne
 Below is a table of upstream image repositories that will have supported cache rules in hmctspublic. No image tags are added by default, but will be added on the first running instance of `docker pull hmctspublic.azurecr.io/${destinationRepo}:image-tag`, where destinationRepo is the [mapped repository in our ACR for the upstream repository](acr-respositories.yaml), any upstream image tag is available.
 
 
-| **Upstream Repository Name**  | **HMCTS Repository Name** |
-| -------- | ------- |
-| `bitnami/external-dns`               | `hmctspublic.azurecr.io/imported/bitnami/external-dns`    |
-| `bitnami/kubectl`                    | `hmctspublic.azurecr.io/imported/bitnami/kubectl`         |
-| `bitnami/postgresql`                 | `hmctspublic.azurecr.io/imported/bitnami/postgresql`      |
-| `bitnami/redis`                      | `hmctspublic.azurecr.io/imported/bitnami/redis`           |
-| `datawire/tel2`                      | `hmctspublic.azurecr.io/imported/datawire/tel2`           |
-| `dius/pact-broker`                   | `hmctspublic.azurecr.io/imported/dius/pact-broker`        |
-| `drycc/service-catalog`              | `hmctspublic.azurecr.io/imported/dyrcc/service-catalog`   |
-| `dynatrace/dynatrace-operator`       | `hmctspublic.azurecr.io/imported/dynatrace/dynatrace-operator` |
-| `fluent/fluent-bit`                  | `hmctspublic.azurecr.io/imported/fluent/fluent-bit`       |
-| `grafana/grafana`                    | `hmctspublic.azurecr.io/imported/grafana`                 |
-| `jimmidyson/configmap-reload`        | `hmctspublic.azurecr.io/imported/jimmidyson/configmap-reload` |
-| `kiwigrid/k8s-sidecar`               | `hmctspublic.azurecr.io/imported/kiwigrid/k8s-sidecar`    |
-| `kubeshop/testkube-api-server`       | `hmctspublic.azurecr.io/imported/kubeshop/testkube-api-server` |
-| `kubeshop/testkube-dashboard`        | `hmctspublic.azurecr.io/imported/kubeshop/testkube-dashboard` |
-| `kubeshop/testkube-operator`         | `hmctspublic.azurecr.io/imported/kubeshop/testkube-operator`|
-| `linuxserver/openssh-server`         | `hmctspublic.azurecr.io/imported/linuxserver/openssh-server` | 
-| `mailhog/mailhog`                    | `hmctspublic.azurecr.io/imported/mailhog/mailhog`          |
-| `minio/minio`                        | `hmctspublic.azurecr.io/imported/minio/minio`              |
-| `nats`                               | `hmctspublic.azurecr.io/imported/nats`                   |
-| `natsio/nats-server-config-reloader` | `hmctspublic.azurecr.io/imported/natsi/nats-server-config-reloader` |
-| `natsio/prometheus-nats-exporter`    | `hmctspublic.azurecr.io/imported/natsio/prometheus-nats-exporter` |
-| `neuvector/controller`               | `hmctspublic.azurecr.io/imported/neuvector/controller`    |
-| `neuvector/enforcer`                 | `hmctspublic.azurecr.io/imported/neuvector/enforcer`      |
-| `neuvector/manager`                  | `hmctspublic.azurecr.io/imported/neuvector/manager`       |
-| `neuvector/updater`                  | `hmctspublic.azurecr.io/imported/neuvector/updater`       |
-| `netboxcommunity/netbox`             | `hmctspublic.azurecr.io/imported/netboxcommunity/netbox`  |
-| `nginx`                              | `hmctspublic.azurecr.io/imported/nginx`                   |
-| `node`                               | `hmctspublic.azurecr.io/imported/library/node`            |
+| **Upstream Repository Name**           | **HMCTS Repository Name**                                              |
+| -------------------------------------- | ---------------------------------------------------------------------- |
+| `bitnami/external-dns`                 | `hmctspublic.azurecr.io/imported/bitnami/external-dns`                 |
+| `bitnami/kubectl`                      | `hmctspublic.azurecr.io/imported/bitnami/kubectl`                      |
+| `bitnami/postgresql`                   | `hmctspublic.azurecr.io/imported/bitnami/postgresql`                   |
+| `bitnami/redis`                        | `hmctspublic.azurecr.io/imported/bitnami/redis`                        |
+| `datawire/tel2`                        | `hmctspublic.azurecr.io/imported/datawire/tel2`                        |
+| `dius/pact-broker`                     | `hmctspublic.azurecr.io/imported/dius/pact-broker`                     |
+| `drycc/service-catalog`                | `hmctspublic.azurecr.io/imported/dyrcc/service-catalog`                |
+| `dynatrace/dynatrace-operator`         | `hmctspublic.azurecr.io/imported/dynatrace/dynatrace-operator`         |
+| `fluent/fluent-bit`                    | `hmctspublic.azurecr.io/imported/fluent/fluent-bit`                    |
+| `grafana/grafana`                      | `hmctspublic.azurecr.io/imported/grafana`                              |
+| `jimmidyson/configmap-reload`          | `hmctspublic.azurecr.io/imported/jimmidyson/configmap-reload`          |
+| `kiwigrid/k8s-sidecar`                 | `hmctspublic.azurecr.io/imported/kiwigrid/k8s-sidecar`                 |
+| `kubeshop/testkube-api-server`         | `hmctspublic.azurecr.io/imported/kubeshop/testkube-api-server`         |
+| `kubeshop/testkube-dashboard`          | `hmctspublic.azurecr.io/imported/kubeshop/testkube-dashboard`          |
+| `kubeshop/testkube-operator`           | `hmctspublic.azurecr.io/imported/kubeshop/testkube-operator`           |
+| `linuxserver/openssh-server`           | `hmctspublic.azurecr.io/imported/linuxserver/openssh-server`           |
+| `mailhog/mailhog`                      | `hmctspublic.azurecr.io/imported/mailhog/mailhog`                      |
+| `minio/minio`                          | `hmctspublic.azurecr.io/imported/minio/minio`                          |
+| `nats`                                 | `hmctspublic.azurecr.io/imported/nats`                                 |
+| `natsio/nats-server-config-reloader`   | `hmctspublic.azurecr.io/imported/natsi/nats-server-config-reloader`    |
+| `natsio/prometheus-nats-exporter`      | `hmctspublic.azurecr.io/imported/natsio/prometheus-nats-exporter`      |
+| `neuvector/controller`                 | `hmctspublic.azurecr.io/imported/neuvector/controller`                 |
+| `neuvector/enforcer`                   | `hmctspublic.azurecr.io/imported/neuvector/enforcer`                   |
+| `neuvector/manager`                    | `hmctspublic.azurecr.io/imported/neuvector/manager`                    |
+| `neuvector/updater`                    | `hmctspublic.azurecr.io/imported/neuvector/updater`                    |
+| `netboxcommunity/netbox`               | `hmctspublic.azurecr.io/imported/netboxcommunity/netbox`               |
+| `nginx`                                | `hmctspublic.azurecr.io/imported/nginx`                                |
+| `node`                                 | `hmctspublic.azurecr.io/imported/library/node`                         |
 | `otel/opentelemetry-collector-contrib` | `hmctspublic.azurecr.io/imported/otel/opentelemetry-collector/contrib` |
-| `prom/node-exporter`                 | `hmctspublic.azurecr.io/imported/prom/node-exporter`       |
-| `traefik`                            | `hmctspublic.azurecr.io/imported/traefik`                 |
-| `willwill/kube-slack`                | `hmctspublic.azurecr.io/imported/willwill/kube-slack`     |
+| `prom/node-exporter`                   | `hmctspublic.azurecr.io/imported/prom/node-exporter`                   |
+| `traefik`                              | `hmctspublic.azurecr.io/imported/traefik`                              |
+| `willwill/kube-slack`                  | `hmctspublic.azurecr.io/imported/willwill/kube-slack`                  |
+| `postgres`                             | `hmctspublic.azurecr.io/imported/postgres`                             |
+| `toolbelt/oathtool`                    | `hmctspublic.azurecr.io/imported/toolbelt/oathtool`                    |
+| `jqlang/jq`                            | `hmctspublic.azurecr.io/imported/jqlang/jq`                            |
 
 ### ACR Cache Rules
 The pipeline will also add ACR Cache Rules into hmctspublic registry.
