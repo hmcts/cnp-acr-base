@@ -156,5 +156,5 @@ rules:
     destinationRepo: imported/testcontainers/ryuk
   alpine:
     ruleName: alpine
-    repoName: alpine
+    repoName: library/alpine
     destinationRepo: imported/alpine
