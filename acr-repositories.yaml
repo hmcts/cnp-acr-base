@@ -21,8 +21,8 @@ rules:
     ruleName: kubectl
     repoName: bitnami/kubectl
     destinationRepo: imported/bitnami/kubectl
-  redis:
-    ruleName: redis
+  bitnami-redis:
+    ruleName: bitnami-redis
     repoName: bitnami/redis
     destinationRepo: imported/bitnami/redis
   pact-broker:
