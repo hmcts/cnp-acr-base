@@ -166,3 +166,7 @@ rules:
     ruleName: testcontainers-sshd
     repoName: testcontainers/sshd
     destinationRepo: imported/testcontainers/sshd
+  williamyeh-java8:
+    ruleName: williamyeh-java8
+    repoName: williamyeh/java8
+    destinationRepo: imported/williamyeh/java8

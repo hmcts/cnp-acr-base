@@ -48,6 +48,7 @@ Below is a table of upstream image repositories that will have supported cache r
 | `toolbelt/oathtool`                    | `hmctspublic.azurecr.io/imported/toolbelt/oathtool`                    |
 | `traefik`                              | `hmctspublic.azurecr.io/imported/traefik`                              |
 | `willwill/kube-slack`                  | `hmctspublic.azurecr.io/imported/willwill/kube-slack`                  |
+| `williamyeh/java8`                     | `hmctspublic.azurecr.io/imported/williamyeh/java8`                     |
 
 ### ACR Cache Rules
 The pipeline will also add ACR Cache Rules into hmctspublic registry.
