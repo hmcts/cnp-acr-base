@@ -170,3 +170,7 @@ rules:
     ruleName: williamyeh-java8
     repoName: williamyeh/java8
     destinationRepo: imported/williamyeh/java8
+  azurite:
+    ruleName: azure-storage-azurite
+    repoName: azure-storage/azurite
+    destinationRepo: imported/azure-storage/azurite
