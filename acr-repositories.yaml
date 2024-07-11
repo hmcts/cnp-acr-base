@@ -173,4 +173,5 @@ rules:
   azurite:
     ruleName: azure-storage-azurite
     repoName: azure-storage/azurite
+    registry: mcr.microsoft.com
     destinationRepo: imported/azure-storage/azurite
