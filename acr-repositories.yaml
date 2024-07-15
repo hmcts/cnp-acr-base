@@ -184,6 +184,6 @@ rules:
     repoName: citizensadvice/clamav-mock
     destinationRepo: imported/citizensadvice/clamav-mock
   ruby:
-    ruleName: ruby
+    ruleName: library-ruby
     repoName: library/ruby
     destinationRepo: imported/library/ruby
