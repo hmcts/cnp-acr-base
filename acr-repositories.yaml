@@ -174,3 +174,11 @@ rules:
     ruleName: azure-storage-azurite
     repoName: azure-storage/azurite
     destinationRepo: imported/azure-storage/azurite
+  clamav:
+    ruleName: citizensadvice-clamav-mock
+    repoName: citizensadvice/clamav-mock
+    destinationRepo: imported/citizensadvice/clamav-mock
+  ruby:
+    ruleName: ruby
+    repoName: library/ruby
+    destinationRepo: imported/library/ruby

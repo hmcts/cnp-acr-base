@@ -1,13 +1,55 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-baseTag=$1
-targetImage=$2
-acrName=$3
-targetRegistry=$4
-baseDigest=$5
-acrDigest=$6
+baseTag=
+targetImage=
+acrName=
+targetRegistry=
+baseDigest=
+acrDigest=
+
+usage(){
+>&2 cat << EOF
+------------------------------------------------
+Script to check if AKS cluster is active state
+------------------------------------------------
+Usage: $0
+    [ -bt |--baseTag ] 
+    [ -ti |--targetImage ]
+    [ -an |--acrName ]
+    [ -tr |--targetRegistry ]
+    [ -bd |--baseDigest ]
+    [ -ad |--acrDigest ]
+    [ -h |--help ] 
+EOF
+exit 1
+}
+
+eval set -- ${args}
+while :
+do
+    case $1 in
+        -h  | --help )           usage                  ; shift   ;;
+        -bt | --baseTag )        baseTag=$2             ; shift 2 ;;
+        -ti | --targetImage )    targetImage=$2         ; shift 2 ;;
+        -an | --acrName )        acrName=$2             ; shift 2 ;;
+        -tr | --targetRegistry ) targetRegistry=$2      ; shift 2 ;;
+        -bd | --baseDigest )     baseDigest=$2          ; shift 2 ;;
+        -ad | --acrDigest )      acrDigest=$2           ; shift 2 ;;
+        --) shift; break ;;
+        *) >&2 echo Unsupported option: $1
+        usage ;;
+    esac
+done
+
+# Check if all arguments are provided
+if [ -z "$baseTag" ] || [ -z "$targetImage" ] || [ -z "$acrName" ] || [ -z "$targetRegistry" ] || [ -z "$baseDigest" ] || [ -z "$acrDigest" ]; then
+    echo "------------------------" 
+    echo 'Some values are missing, please supply all the required arguments' >&2
+    echo "------------------------"
+    exit 1
+fi
 
 # Move base tag to new image
 [ "${acrDigest}" != "" ] && echo "Untagging previous ${baseTag} ..." && az acr repository untag -n ${acrName} --image ${targetImage}:${baseTag}
