@@ -12,7 +12,7 @@ rules:
   elastic-search:
     ruleName: elastic-search
     repoName: elasticsearch/elasticsearch
-    destinationRepo: imported/elasticsearch/elasticsearch
+    destinationRepo: imported/elastic/elasticsearch
   external-dns:
     ruleName: external-dns
     repoName: bitnami/external-dns
