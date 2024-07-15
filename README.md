@@ -50,6 +50,7 @@ Below is a table of upstream image repositories that will have supported cache r
 | `willwill/kube-slack`                  | `hmctspublic.azurecr.io/imported/willwill/kube-slack`                  |
 | `williamyeh/java8`                     | `hmctspublic.azurecr.io/imported/williamyeh/java8`                     |
 | `azure-storage/azurite`                | `hmctspublic.azurecr.io/imported/azure-storage/azurite`                |
+| `atmoz/sftp`                           | `hmctspublic.azurecr.io/imported/atmoz/sftp`                           |
 
 ### ACR Cache Rules
 The pipeline will also add ACR Cache Rules into hmctspublic registry.
