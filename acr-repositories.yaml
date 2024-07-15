@@ -173,7 +173,12 @@ rules:
   azurite:
     ruleName: azure-storage-azurite
     repoName: azure-storage/azurite
+    registry: mcr.microsoft.com
     destinationRepo: imported/azure-storage/azurite
+  sftp:
+    ruleName: atmoz-sftp
+    repoName: atmoz/sftp
+    destinationRepo: imported/atmoz/sftp
   clamav:
     ruleName: citizensadvice-clamav-mock
     repoName: citizensadvice/clamav-mock
