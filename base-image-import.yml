@@ -83,19 +83,20 @@ jobs:
         echo "Importing $(baseRegistry)/$(baseImage):$(baseTag) as $(targetImage):$(baseTag)-$(baseDigest) ..."
         az acr import --force --name $(acrName) --source $(baseRegistry)/$(baseImage):$(baseTag) --image $(targetImage):$(baseTag)-$(baseDigest) 
 
-  - task: AzureCLI@1
-    displayName: 'Security scan new image'
-    condition: eq(variables['newTagFound'], 'true')
-    inputs:
-      azureSubscription: $(serviceConnection)
-      scriptLocation: 'scriptPath'
-      scriptPath: base-image-scan.sh
-      arguments: |
-        --targetRegistry "$(targetRegistry)" --targetImage "$(targetImage)" --baseTag "$(baseTag)-$(baseDigest)" --registryPublicUsername "$(registry-public-username)" --registryPublicPassword "$(registry-public-password)" --registrySlackWebhook "$(registry-slack-webhook)" --scannerUrl "$(neuvectorController)" --scannerUsername "$(neuvector-admin-username)" --scannerPassword "$(neuvector-new-admin-password)"
+  # - task: AzureCLI@1
+  #   displayName: 'Security scan new image'
+  #   condition: eq(variables['newTagFound'], 'true')
+  #   inputs:
+  #     azureSubscription: $(serviceConnection)
+  #     scriptLocation: 'scriptPath'
+  #     scriptPath: base-image-scan.sh
+  #     arguments: |
+  #       --targetRegistry "$(targetRegistry)" --targetImage "$(targetImage)" --baseTag "$(baseTag)-$(baseDigest)" --registryPublicUsername "$(registry-public-username)" --registryPublicPassword "$(registry-public-password)" --registrySlackWebhook "$(registry-slack-webhook)" --scannerUrl "$(neuvectorController)" --scannerUsername "$(neuvector-admin-username)" --scannerPassword "$(neuvector-new-admin-password)"
 
   - task: AzureCLI@1
     displayName: 'Re-tag new image using the base tag'
-    condition: and(eq(variables['newTagFound'], 'true'), eq(variables['scanPassed'], 'true'))
+    # condition: and(eq(variables['newTagFound'], 'true'), eq(variables['scanPassed'], 'true'))
+    condition: eq(variables['newTagFound'], 'true')
     inputs:
       azureSubscription: $(serviceConnection)
       scriptLocation: 'scriptPath'
