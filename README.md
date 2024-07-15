@@ -1,5 +1,7 @@
 # acr-base-importer
-Pipelines to automatically import updates to base images and scan them for vulnerabilities
+
+Pipeline to automatically import updates to base images (java) or create caching rules for 3rd party images.
+
 ## Supported Upstream Image Repositories
 
 Below is a table of upstream image repositories that will have supported cache rules in hmctspublic. No image tags are added by default, but will be added on the first running instance of `docker pull hmctspublic.azurecr.io/${destinationRepo}:image-tag`, where destinationRepo is the [mapped repository in our ACR for the upstream repository](acr-respositories.yaml), any upstream image tag is available.
@@ -51,15 +53,19 @@ Below is a table of upstream image repositories that will have supported cache r
 | `williamyeh/java8`                     | `hmctspublic.azurecr.io/imported/williamyeh/java8`                     |
 | `azure-storage/azurite`                | `hmctspublic.azurecr.io/imported/azure-storage/azurite`                |
 | `atmoz/sftp`                           | `hmctspublic.azurecr.io/imported/atmoz/sftp`                           |
+| `citizensadvice/clamav-mock`           | `hmctspublic.azurecr.io/imported/citizensadvice/clamav-mock`           |
+| `library/ruby`                         | `hmctspublic.azurecr.io/imported/library/ruby`                         |
 
 ### ACR Cache Rules
+
 The pipeline will also add ACR Cache Rules into hmctspublic registry.
 
-To create a new ACR cache rule on a repository you need to amend the [yaml file](acr-repositories.yaml), to add the required details of the new cache rule. You need to add the following block of code, replacing the values of the parameters with the one you need creating. The below is just an example of an existing ACR Cache rule
- 
- ```
+To create a new ACR cache rule on a repository you need to amend the [yaml file](acr-repositories.yaml), to add the required details of the new cache rule. 
+<br>You need to add the following block of code, replacing the values of the parameters with the one you need creating. The below is just an example of an existing ACR Cache rule
+
+```yaml
   jenkins: # this can be the same as the name of the repository
     ruleName: Jenkins # the name of the cache rule.  Must be more than 4 characters in length.
     repoName: hmcts/jenkins # the name of the repository the image is currently stored in. Should always be format of publisher/image. If there is no publisher, please use "library".
     destinationRepo: jenkins # destination repository as it appears in the ACR Cache, will not be visibile until first instance of docker pull command
- ```
+```

@@ -12,7 +12,7 @@ rules:
   elastic-search:
     ruleName: elastic-search
     repoName: elasticsearch/elasticsearch
-    destinationRepo: imported/elasticsearch/elasticsearch
+    destinationRepo: imported/elastic/elasticsearch
   external-dns:
     ruleName: external-dns
     repoName: bitnami/external-dns
@@ -179,3 +179,11 @@ rules:
     ruleName: atmoz-sftp
     repoName: atmoz/sftp
     destinationRepo: imported/atmoz/sftp
+  clamav:
+    ruleName: citizensadvice-clamav-mock
+    repoName: citizensadvice/clamav-mock
+    destinationRepo: imported/citizensadvice/clamav-mock
+  ruby:
+    ruleName: library-ruby
+    repoName: library/ruby
+    destinationRepo: imported/library/ruby

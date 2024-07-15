@@ -14,5 +14,5 @@ for key in $(echo $RULES_CONFIG | jq -r '.rules | keys | .[]'); do
     REGISTRY=$(echo $RULES_CONFIG | jq -r '.rules | ."'$key'" | if has("registry") then .registry else "docker.io" end')
 
     echo "Creating ACR Cache Rule for $key, source: $REGISTRY/$REPO_NAME, destination: $DESTINATION_NAME..."
-    az acr cache create -r hmctspublic -n $RULE_NAME -s $REGISTRY/$REPO_NAME -t $DESTINATION_NAME
+    az acr cache create -r hmctspublic -n $RULE_NAME -s $REGISTRY/$REPO_NAME -t $DESTINATION_NAME -c dockerhub
 done
