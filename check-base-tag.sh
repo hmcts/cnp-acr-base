@@ -24,6 +24,15 @@ EOF
 exit 1
 }
 
+args=$(getopt -a -o bi:br:bt:ti:an: --long baseImage:,baseRegistry:,baseTag:,targetImage:,acrName:,help -- "$@")
+if [[ $? -gt 0 ]]; then
+    usage
+fi
+
+# Debug commands, uncomment if you are having issues
+# >&2 echo [$@] passed to script
+# >&2 echo getopt creates [${args}]
+
 eval set -- ${args}
 while :
 do

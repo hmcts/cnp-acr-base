@@ -15,16 +15,25 @@ usage(){
 Script to check if AKS cluster is active state
 ------------------------------------------------
 Usage: $0
-    [ -bt |--baseTag ] 
-    [ -ti |--targetImage ]
-    [ -an |--acrName ]
-    [ -tr |--targetRegistry ]
-    [ -bd |--baseDigest ]
-    [ -ad |--acrDigest ]
-    [ -h |--help ] 
+    [ -bt | --baseTag ] 
+    [ -ti | --targetImage ]
+    [ -an | --acrName ]
+    [ -tr | --targetRegistry ]
+    [ -bd | --baseDigest ]
+    [ -ad | --acrDigest ]
+    [ -h | --help ] 
 EOF
 exit 1
 }
+
+args=$(getopt -a -o bt:ti:an:tr:bd:ad: --long baseTag:,targetImage:,acrName:,targetRegistry:,baseDigest:,acrDigest:,help -- "$@")
+if [[ $? -gt 0 ]]; then
+    usage
+fi
+
+# Debug commands, uncomment if you are having issues
+# >&2 echo [$@] passed to script
+# >&2 echo getopt creates [${args}]
 
 eval set -- ${args}
 while :
