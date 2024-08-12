@@ -9,6 +9,10 @@ rules:
     ruleName: postgres
     repoName: library/postgres
     destinationRepo: imported/postgres
+  curl:
+    ruleName: curl
+    repoName: curlimages/curl
+    destinationRepo: imported/curlimages/curl
   elastic-search:
     ruleName: elastic-search
     repoName: elasticsearch/elasticsearch
