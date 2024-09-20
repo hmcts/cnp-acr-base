@@ -10,7 +10,7 @@ rules:
     repoName: library/postgres
     destinationRepo: imported/postgres
   curl:
-    ruleName: curl
+    ruleName: curl-cache
     repoName: curlimages/curl
     destinationRepo: imported/curlimages/curl
   elastic-search:
