@@ -9,6 +9,10 @@ rules:
     ruleName: postgres
     repoName: library/postgres
     destinationRepo: imported/postgres
+  postgresql-client:
+    ruleName: postgresql-client
+    repoName: jbergknoff/postgresql-client
+    destinationRepo: imported/jbergknoff/postgresql-client
   curl:
     ruleName: curl-cache
     repoName: curlimages/curl
