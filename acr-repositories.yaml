@@ -195,3 +195,7 @@ rules:
     ruleName: library-ruby
     repoName: library/ruby
     destinationRepo: imported/library/ruby
+  mikefarah-yq:
+    ruleName: mikefarah-yq
+    repoName: mikefarah/yq
+    destinationRepo: imported/mikefarah/yq
