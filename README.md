@@ -27,8 +27,9 @@ Below is a table of upstream image repositories that will have supported cache r
 | `kubeshop/testkube-api-server`         | `hmctspublic.azurecr.io/imported/kubeshop/testkube-api-server`         |
 | `kubeshop/testkube-dashboard`          | `hmctspublic.azurecr.io/imported/kubeshop/testkube-dashboard`          |
 | `kubeshop/testkube-operator`           | `hmctspublic.azurecr.io/imported/kubeshop/testkube-operator`           |
-| `linuxserver/openssh-server`           | `hmctspublic.azurecr.io/imported/linuxserver/openssh-server`           | 
+| `linuxserver/openssh-server`           | `hmctspublic.azurecr.io/imported/linuxserver/openssh-server`           |
 | `mailhog/mailhog`                      | `hmctspublic.azurecr.io/imported/mailhog/mailhog`                      |
+| `mikefarah/yq`                         | `hmctspublic.azurecr.io/imported/mikefarah/yq`                         |
 | `minio/minio`                          | `hmctspublic.azurecr.io/imported/minio/minio`                          |
 | `nats`                                 | `hmctspublic.azurecr.io/imported/nats`                                 |
 | `natsio/nats-server-config-reloader`   | `hmctspublic.azurecr.io/imported/natsi/nats-server-config-reloader`    |
@@ -60,7 +61,7 @@ Below is a table of upstream image repositories that will have supported cache r
 
 The pipeline will also add ACR Cache Rules into hmctspublic registry.
 
-To create a new ACR cache rule on a repository you need to amend the [yaml file](acr-repositories.yaml), to add the required details of the new cache rule. 
+To create a new ACR cache rule on a repository you need to amend the [yaml file](acr-repositories.yaml), to add the required details of the new cache rule.
 <br>You need to add the following block of code, replacing the values of the parameters with the one you need creating. The below is just an example of an existing ACR Cache rule
 
 ```yaml
