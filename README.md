@@ -4,7 +4,7 @@ Pipeline to automatically import updates to base images (java) or create caching
 
 ## Supported Upstream Image Repositories
 
-Below is a table of upstream image repositories that will have supported cache rules in hmctspublic. No image tags are added by default, but will be added on the first running instance of `docker pull hmctspublic.azurecr.io/${destinationRepo}:image-tag`, where destinationRepo is the [mapped repository in our ACR for the upstream repository](acr-respositories.yaml), any upstream image tag is available.
+Below is a table of upstream image repositories that will have supported cache rules in hmctspublic. No image tags are added by default, but will be added on the first running instance of `docker pull hmctspublic.azurecr.io/${destinationRepo}:image-tag`, where destinationRepo is the [mapped repository in our ACR for the upstream repository](acr-repositories.yaml), any upstream image tag is available.
 
 
 | **Upstream Repository Name**           | **HMCTS Repository Name**                                              |
